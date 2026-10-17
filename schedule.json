@@ -1,0 +1,790 @@
+{
+ "account": "@profluencyuk",
+ "timezone": "Europe/London",
+ "items": [
+  {
+   "id": "2026-10-19-0830-story",
+   "post_at": "2026-10-19T08:30:00+01:00",
+   "type": "story_video",
+   "media": "2026-10-19-0830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/01 Mon 19 Oct 1 - Question.jpg",
+   "manual": "Post from the Instagram app: this story was made for a question sticker (\"Answer in the box below\"). Add the sticker."
+  },
+  {
+   "id": "2026-10-19-1230-story",
+   "post_at": "2026-10-19T12:30:00+01:00",
+   "type": "story_video",
+   "media": "2026-10-19-1230-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/01 Mon 19 Oct 2 - Why one question.jpg"
+  },
+  {
+   "id": "2026-10-19-1830-story",
+   "post_at": "2026-10-19T18:30:00+01:00",
+   "type": "story_video",
+   "media": "2026-10-19-1830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/01 Mon 19 Oct 3 - Newsletter.jpg",
+   "manual": "Post from the Instagram app: this story was made for a link sticker to the newsletter sign-up (\"Sign up below\"). Add the sticker."
+  },
+  {
+   "id": "2026-10-19-1930-reel",
+   "post_at": "2026-10-19T19:30:00+01:00",
+   "type": "reel",
+   "media": "2026-10-19-1930-reel.mp4",
+   "cover": "2026-10-19-1930-reel-cover.jpg",
+   "caption": "What does home sound like?\n\nFor some it’s the kettle going on. For others it’s a language they grew up with, or one voice on the phone on a Sunday. Tell us yours in the comments, in any language. We’ll share a few on Sunday.\n\nA new question every Monday. Save this one for your next long dinner.",
+   "first_comment": "#conversationstarters #meaningfulconversations #connection #profluency",
+   "source": "Reels/01 Mon 19 Oct - Question of the week 01 (Reel).mp4"
+  },
+  {
+   "id": "2026-10-20-0830-story",
+   "post_at": "2026-10-20T08:30:00+01:00",
+   "type": "story_image",
+   "media": "2026-10-20-0830-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/02 Tue 20 Oct 1 - Guess the phrase.jpg"
+  },
+  {
+   "id": "2026-10-20-1230-story",
+   "post_at": "2026-10-20T12:30:00+01:00",
+   "type": "story_image",
+   "media": "2026-10-20-1230-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/02 Tue 20 Oct 2 - The meaning.jpg"
+  },
+  {
+   "id": "2026-10-20-1830-story",
+   "post_at": "2026-10-20T18:30:00+01:00",
+   "type": "story_image",
+   "media": "2026-10-20-1830-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/02 Tue 20 Oct 3 - Dime Más Cards.jpg"
+  },
+  {
+   "id": "2026-10-20-1930-post",
+   "post_at": "2026-10-20T19:30:00+01:00",
+   "type": "post",
+   "media": "2026-10-20-1930-post.jpg",
+   "caption": "Hablando se entiende la gente. Inglés: People understand each other by talking.\n\nYou’ll hear it when things get tangled: a disagreement, a plan that fell apart, a misunderstanding. Sit down, talk it through, and it sorts itself out.\n\nTry it this week: “No te preocupes, hablando se entiende la gente.” Don’t worry, we’ll sort it out by talking.\n\nDime Más Spanish conversation cards, with English on every card. On Amazon UK.",
+   "first_comment": "#learnspanish #spanishphrases #aprenderespañol #spanishlearning #dimemas",
+   "source": "Feed posts/02 Tue 20 Oct - Frase de la semana.jpg"
+  },
+  {
+   "id": "2026-10-21-0830-story",
+   "post_at": "2026-10-21T08:30:00+01:00",
+   "type": "story_image",
+   "media": "2026-10-21-0830-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/03 Wed 21 Oct 1 - Something new.jpg"
+  },
+  {
+   "id": "2026-10-21-1230-story",
+   "post_at": "2026-10-21T12:30:00+01:00",
+   "type": "story_image",
+   "media": "2026-10-21-1230-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/03 Wed 21 Oct 2 - For beginners.jpg"
+  },
+  {
+   "id": "2026-10-21-1830-story",
+   "post_at": "2026-10-21T18:30:00+01:00",
+   "type": "story_image",
+   "media": "2026-10-21-1830-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/03 Wed 21 Oct 3 - Waitlist.jpg",
+   "manual": "Post from the Instagram app: this story was made for a countdown sticker (\"Join the waitlist\"). Add the sticker."
+  },
+  {
+   "id": "2026-10-21-1930-post",
+   "post_at": "2026-10-21T19:30:00+01:00",
+   "type": "post",
+   "media": "2026-10-21-1930-post.jpg",
+   "caption": "Algo nuevo está en camino. Inglés: Something new is on its way.\n\nDime Más is getting a beginner level: Nivel Básico, A1–A2. Real questions for your first real conversations in Spanish, with English on every card.\n\nWant to know first? Join the waitlist, link in bio.",
+   "first_comment": "#learnspanish #spanishforbeginners #spanishlearner #dimemas #comingsoon",
+   "source": "Feed posts/03 Wed 21 Oct - Beginner build-up.jpg"
+  },
+  {
+   "id": "2026-10-22-0830-story",
+   "post_at": "2026-10-22T08:30:00+01:00",
+   "type": "story_video",
+   "media": "2026-10-22-0830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/04 Thu 22 Oct 1 - Insight.jpg"
+  },
+  {
+   "id": "2026-10-22-1230-story",
+   "post_at": "2026-10-22T12:30:00+01:00",
+   "type": "story_video",
+   "media": "2026-10-22-1230-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/04 Thu 22 Oct 2 - Poll.jpg",
+   "manual": "Post from the Instagram app: this story was made for a poll sticker (\"Tap your answer below\"). Add the sticker."
+  },
+  {
+   "id": "2026-10-22-1830-story",
+   "post_at": "2026-10-22T18:30:00+01:00",
+   "type": "story_video",
+   "media": "2026-10-22-1830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/04 Thu 22 Oct 3 - Try this.jpg"
+  },
+  {
+   "id": "2026-10-22-1930-post",
+   "post_at": "2026-10-22T19:30:00+01:00",
+   "type": "post",
+   "media": "2026-10-22-1930-post.jpg",
+   "caption": "A few words in someone’s language can change the room.\n\nYou don’t need to be fluent. A greeting, a thank you, a question asked with care. People notice, and they open up.\n\nWhich few words have changed a room for you?",
+   "first_comment": "#languagelearning #connection #culture #travel #profluency",
+   "source": "Feed posts/04 Thu 22 Oct - Insight.jpg"
+  },
+  {
+   "id": "2026-10-23-0830-story",
+   "post_at": "2026-10-23T08:30:00+01:00",
+   "type": "story_image",
+   "media": "2026-10-23-0830-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/05 Fri 23 Oct 1 - Friday night.jpg"
+  },
+  {
+   "id": "2026-10-23-1230-story",
+   "post_at": "2026-10-23T12:30:00+01:00",
+   "type": "story_image",
+   "media": "2026-10-23-1230-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/05 Fri 23 Oct 2 - How to play.jpg"
+  },
+  {
+   "id": "2026-10-23-1830-story",
+   "post_at": "2026-10-23T18:30:00+01:00",
+   "type": "story_image",
+   "media": "2026-10-23-1830-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/05 Fri 23 Oct 3 - Shop.jpg",
+   "manual": "Post from the Instagram app: this story was made for a link sticker to Amazon (\"Available on Amazon UK\"). Add the sticker."
+  },
+  {
+   "id": "2026-10-23-1930-reel",
+   "post_at": "2026-10-23T19:30:00+01:00",
+   "type": "reel",
+   "media": "2026-10-23-1930-reel.mp4",
+   "cover": "2026-10-23-1930-reel-cover.jpg",
+   "caption": "Viernes por la noche. Saca una carta. Inglés: Friday night. Draw a card.\n\nDime Más Intermediate (B1–B2): 60 cards of real questions in Spanish, with English on every card, for dinners, flatmates, dates and long trips.\n\nOn Amazon UK, link in bio.",
+   "first_comment": "#learnspanish #conversationcards #gamenight #spanishgames #dimemas",
+   "source": "Reels/05 Fri 23 Oct - Saca una carta (Reel).mp4"
+  },
+  {
+   "id": "2026-10-24-0930-story",
+   "post_at": "2026-10-24T09:30:00+01:00",
+   "type": "story_image",
+   "media": "2026-10-24-0930-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/06 Sat 24 Oct 1 - Write it down.jpg"
+  },
+  {
+   "id": "2026-10-24-1030-post",
+   "post_at": "2026-10-24T10:30:00+01:00",
+   "type": "post",
+   "media": "2026-10-24-1030-post.jpg",
+   "caption": "Escríbelo. Dilo en voz alta. Inglés: Write it down. Say it out loud.\n\nThe Dime Más Journal is nearly here. Twenty weeks of writing in Spanish: words of the week, a saying and a question to answer, made to use with the cards or on its own.\n\nBe the first to know when it lands. Join the waitlist, link in bio.",
+   "first_comment": "#spanishjournal #learnspanish #journaling #languagejournal #dimemas",
+   "source": "Feed posts/06 Sat 24 Oct - Journal build-up.jpg"
+  },
+  {
+   "id": "2026-10-24-1300-story",
+   "post_at": "2026-10-24T13:00:00+01:00",
+   "type": "story_image",
+   "media": "2026-10-24-1300-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/06 Sat 24 Oct 2 - Inside.jpg"
+  },
+  {
+   "id": "2026-10-24-1830-story",
+   "post_at": "2026-10-24T18:30:00+01:00",
+   "type": "story_image",
+   "media": "2026-10-24-1830-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/06 Sat 24 Oct 3 - Poll and waitlist.jpg",
+   "manual": "Post from the Instagram app: this story was made for a poll sticker and a waitlist link. Add the sticker."
+  },
+  {
+   "id": "2026-10-25-0930-story",
+   "post_at": "2026-10-25T09:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-10-25-0930-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/07 Sun 25 Oct 1 - Did you know.jpg"
+  },
+  {
+   "id": "2026-10-25-1030-post",
+   "post_at": "2026-10-25T10:30:00+00:00",
+   "type": "post",
+   "media": "2026-10-25-1030-post.jpg",
+   "caption": "More than 7,000 languages are spoken around the world.\n\nEvery one of them is a way into someone’s life. Which one would you learn next, and why?\n\nThank you for every answer to Monday’s question. A few of them are in our stories today.",
+   "first_comment": "#languages #languagelover #culture #travel #profluency",
+   "source": "Feed posts/07 Sun 25 Oct - Did you know.jpg"
+  },
+  {
+   "id": "2026-10-25-1300-story",
+   "post_at": "2026-10-25T13:00:00+00:00",
+   "type": "story_video",
+   "media": "2026-10-25-1300-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/07 Sun 25 Oct 2 - Your turn.jpg",
+   "manual": "Post from the Instagram app: this story was made for a question sticker (\"Tell us in the box below\"). Add the sticker."
+  },
+  {
+   "id": "2026-10-25-1830-story",
+   "post_at": "2026-10-25T18:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-10-25-1830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/07 Sun 25 Oct 3 - Your answers.jpg",
+   "manual": "Post from the Instagram app: share three to five of this week's replies on top of this story."
+  },
+  {
+   "id": "2026-10-26-0830-story",
+   "post_at": "2026-10-26T08:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-10-26-0830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/08 Mon 26 Oct 1 - Question 02.jpg"
+  },
+  {
+   "id": "2026-10-26-1230-story",
+   "post_at": "2026-10-26T12:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-10-26-1230-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/08 Mon 26 Oct 2 - Try this.jpg"
+  },
+  {
+   "id": "2026-10-26-1930-reel",
+   "post_at": "2026-10-26T19:30:00+00:00",
+   "type": "reel",
+   "media": "2026-10-26-1930-reel.mp4",
+   "cover": "2026-10-26-1930-reel-cover.jpg",
+   "caption": "Which meal tastes like a place to you?\n\nMaybe it’s something you ate once, somewhere you’d never been before. Maybe it’s toast at your nan’s kitchen table. Food carries places, and the people we shared it with, better than almost anything.\n\nTell us yours in the comments: the dish, then the place. We’ll share a few on Sunday.\n\nA new question every Monday.",
+   "first_comment": "#conversationstarters #meaningfulconversations #connection #foodmemories #profluency",
+   "source": "Reels/08 Mon 26 Oct - Question of the week 02 (Reel).mp4"
+  },
+  {
+   "id": "2026-10-27-0830-story",
+   "post_at": "2026-10-27T08:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-10-27-0830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/09 Tue 27 Oct 1 - Connection tip.jpg"
+  },
+  {
+   "id": "2026-10-27-1830-story",
+   "post_at": "2026-10-27T18:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-10-27-1830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/09 Tue 27 Oct 2 - Draw a card.jpg"
+  },
+  {
+   "id": "2026-10-28-0830-story",
+   "post_at": "2026-10-28T08:30:00+00:00",
+   "type": "story_image",
+   "media": "2026-10-28-0830-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/10 Wed 28 Oct 1 - Guess the phrase.jpg"
+  },
+  {
+   "id": "2026-10-28-1230-story",
+   "post_at": "2026-10-28T12:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-10-28-1230-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/10 Wed 28 Oct 2 - Beginner card.jpg"
+  },
+  {
+   "id": "2026-10-28-1800-story",
+   "post_at": "2026-10-28T18:00:00+00:00",
+   "type": "story_image",
+   "media": "2026-10-28-1800-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/10 Wed 28 Oct 3 - The meaning.jpg"
+  },
+  {
+   "id": "2026-10-28-1930-reel",
+   "post_at": "2026-10-28T19:30:00+00:00",
+   "type": "reel",
+   "media": "2026-10-28-1930-reel.mp4",
+   "cover": "2026-10-28-1930-reel-cover.jpg",
+   "caption": "Dime con quién andas y te diré quién eres. Inglés: Tell me who you spend time with, and I’ll tell you who you are.\n\nIt’s the Spanish cousin of “birds of a feather”. Half warning, half compliment, depending on who’s saying it.\n\nTry it with a smile this week, when a friend starts sounding just like their flatmate: “Dime con quién andas y te diré quién eres.”\n\nWho has shaped the way you talk? Tell us below.",
+   "first_comment": "#learnspanish #spanishphrases #aprenderespañol #spanishsayings #dimemas",
+   "source": "Reels/10 Wed 28 Oct - Frase de la semana (Reel).mp4"
+  },
+  {
+   "id": "2026-10-29-0830-story",
+   "post_at": "2026-10-29T08:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-10-29-0830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/11 Thu 29 Oct 1 - Insight 02.jpg"
+  },
+  {
+   "id": "2026-10-29-1830-story",
+   "post_at": "2026-10-29T18:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-10-29-1830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/11 Thu 29 Oct 2 - Your turn.jpg"
+  },
+  {
+   "id": "2026-10-30-1230-story",
+   "post_at": "2026-10-30T12:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-10-30-1230-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/12 Fri 30 Oct 1 - Friday card.jpg"
+  },
+  {
+   "id": "2026-10-30-1830-story",
+   "post_at": "2026-10-30T18:30:00+00:00",
+   "type": "story_image",
+   "media": "2026-10-30-1830-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/12 Fri 30 Oct 2 - Shop.jpg"
+  },
+  {
+   "id": "2026-10-31-0930-story",
+   "post_at": "2026-10-31T09:30:00+00:00",
+   "type": "story_image",
+   "media": "2026-10-31-0930-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/13 Sat 31 Oct 1 - Journal.jpg"
+  },
+  {
+   "id": "2026-10-31-1300-story",
+   "post_at": "2026-10-31T13:00:00+00:00",
+   "type": "story_image",
+   "media": "2026-10-31-1300-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/13 Sat 31 Oct 2 - Tomorrow.jpg"
+  },
+  {
+   "id": "2026-10-31-1830-story",
+   "post_at": "2026-10-31T18:30:00+00:00",
+   "type": "story_image",
+   "media": "2026-10-31-1830-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/13 Sat 31 Oct 3 - Journal waitlist.jpg"
+  },
+  {
+   "id": "2026-11-01-0930-story",
+   "post_at": "2026-11-01T09:30:00+00:00",
+   "type": "story_image",
+   "media": "2026-11-01-0930-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/14 Sun 1 Nov 1 - 1 November.jpg"
+  },
+  {
+   "id": "2026-11-01-1030-post",
+   "post_at": "2026-11-01T10:30:00+00:00",
+   "type": "post",
+   "media": "2026-11-01-1030-post.jpg",
+   "caption": "Hoy recordamos contando historias. Inglés: Today, we remember by telling stories.\n\nIn Spain, 1 November is el Día de Todos los Santos, All Saints’ Day. Families take flowers to the cemetery, and bakeries fill with huesos de santo (little marzipan “saints’ bones”) and buñuelos de viento (light, airy fritters).\n\nIn Mexico, el Día de Muertos runs from 1 to 2 November. Families build an ofrenda, an altar with photos, marigolds and the favourite food of the people they miss, and tell their stories out loud.\n\nWhose story would you tell today? Share it below, or tell someone at home.",
+   "first_comment": "#diademuertos #todoslossantos #spanishculture #learnspanish #dimemas",
+   "source": "Feed posts/14 Sun 1 Nov - 1 November.jpg"
+  },
+  {
+   "id": "2026-11-01-1300-story",
+   "post_at": "2026-11-01T13:00:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-01-1300-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/14 Sun 1 Nov 2 - Draw a card.jpg"
+  },
+  {
+   "id": "2026-11-01-1830-story",
+   "post_at": "2026-11-01T18:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-01-1830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/14 Sun 1 Nov 3 - Your answers.jpg",
+   "manual": "Post from the Instagram app: share three to five of this week's replies on top of this story."
+  },
+  {
+   "id": "2026-11-02-0830-story",
+   "post_at": "2026-11-02T08:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-02-0830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/15 Mon 2 Nov 1 - Question 03.jpg"
+  },
+  {
+   "id": "2026-11-02-1230-story",
+   "post_at": "2026-11-02T12:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-02-1230-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/15 Mon 2 Nov 2 - Try this.jpg"
+  },
+  {
+   "id": "2026-11-02-1830-story",
+   "post_at": "2026-11-02T18:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-02-1830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/15 Mon 2 Nov 3 - Newsletter.jpg"
+  },
+  {
+   "id": "2026-11-02-1930-post",
+   "post_at": "2026-11-02T19:30:00+00:00",
+   "type": "post",
+   "media": "2026-11-02-1930-post.jpg",
+   "caption": "Who made you feel at home somewhere new?\n\nA neighbour who knocked with a plate of food. A colleague who explained the rules nobody writes down. A stranger who waited patiently while you found the words.\n\nThey probably don’t know how much it mattered. Tell us about them in the comments, and if you can, tell them too.\n\nA new question every Monday.",
+   "first_comment": "#conversationstarters #belonging #connection #kindness #profluency",
+   "source": "Feed posts/15 Mon 2 Nov - Question of the week 03.jpg"
+  },
+  {
+   "id": "2026-11-03-0830-story",
+   "post_at": "2026-11-03T08:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-03-0830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/16 Tue 3 Nov 1 - Connection tip.jpg"
+  },
+  {
+   "id": "2026-11-03-1830-story",
+   "post_at": "2026-11-03T18:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-03-1830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/16 Tue 3 Nov 2 - Draw a card.jpg"
+  },
+  {
+   "id": "2026-11-04-0830-story",
+   "post_at": "2026-11-04T08:30:00+00:00",
+   "type": "story_image",
+   "media": "2026-11-04-0830-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/17 Wed 4 Nov 1 - Guess the phrase.jpg"
+  },
+  {
+   "id": "2026-11-04-1230-story",
+   "post_at": "2026-11-04T12:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-04-1230-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/17 Wed 4 Nov 2 - Beginner card.jpg"
+  },
+  {
+   "id": "2026-11-04-1930-reel",
+   "post_at": "2026-11-04T19:30:00+00:00",
+   "type": "reel",
+   "media": "2026-11-04-1930-reel.mp4",
+   "cover": "2026-11-04-1930-reel-cover.jpg",
+   "caption": "Poco a poco se va lejos. Inglés: Little by little, you go a long way.\n\nThe one to remember on the days Spanish feels slow. Ten minutes and one question count. So does one line in a notebook.\n\nSay it to someone who’s learning something new this week: “Poco a poco se va lejos.”\n\nWhat are you building up, poco a poco? Tell us below.",
+   "first_comment": "#learnspanish #spanishphrases #aprenderespañol #languagelearning #dimemas",
+   "source": "Reels/17 Wed 4 Nov - Frase de la semana (Reel).mp4"
+  },
+  {
+   "id": "2026-11-05-0830-story",
+   "post_at": "2026-11-05T08:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-05-0830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/18 Thu 5 Nov 1 - Insight 03.jpg"
+  },
+  {
+   "id": "2026-11-05-1800-story",
+   "post_at": "2026-11-05T18:00:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-05-1800-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/18 Thu 5 Nov 2 - Bonfire Night.jpg"
+  },
+  {
+   "id": "2026-11-06-1230-story",
+   "post_at": "2026-11-06T12:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-06-1230-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/19 Fri 6 Nov 1 - Friday card.jpg"
+  },
+  {
+   "id": "2026-11-06-1730-story",
+   "post_at": "2026-11-06T17:30:00+00:00",
+   "type": "story_image",
+   "media": "2026-11-06-1730-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/19 Fri 6 Nov 2 - How to play.jpg"
+  },
+  {
+   "id": "2026-11-06-1930-reel",
+   "post_at": "2026-11-06T19:30:00+00:00",
+   "type": "reel",
+   "media": "2026-11-06-1930-reel.mp4",
+   "cover": "2026-11-06-1930-reel-cover.jpg",
+   "caption": "Una pregunta puede durar toda la cena. Inglés: One question can last a whole dinner.\n\nDime Más Intermediate (B1–B2) is 60 cards of real questions in Spanish, with English on every card. Draw one, ask it, and let the conversation go wherever it goes.\n\nTonight’s card: “Si pudieras cambiar de trabajo mañana, ¿qué harías y por qué?” If you could change jobs tomorrow, what would you do and why?\n\nOn Amazon UK, link in bio.",
+   "first_comment": "#learnspanish #conversationcards #gamenight #spanishgames #dimemas",
+   "source": "Reels/19 Fri 6 Nov - Friday card (Reel).mp4"
+  },
+  {
+   "id": "2026-11-07-0930-story",
+   "post_at": "2026-11-07T09:30:00+00:00",
+   "type": "story_image",
+   "media": "2026-11-07-0930-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/20 Sat 7 Nov 1 - Journal.jpg"
+  },
+  {
+   "id": "2026-11-07-1300-story",
+   "post_at": "2026-11-07T13:00:00+00:00",
+   "type": "story_image",
+   "media": "2026-11-07-1300-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/20 Sat 7 Nov 2 - Journal waitlist.jpg"
+  },
+  {
+   "id": "2026-11-08-1300-story",
+   "post_at": "2026-11-08T13:00:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-08-1300-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/21 Sun 8 Nov 1 - Did you know 02.jpg"
+  },
+  {
+   "id": "2026-11-08-1830-story",
+   "post_at": "2026-11-08T18:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-08-1830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/21 Sun 8 Nov 2 - Your answers.jpg",
+   "manual": "Post from the Instagram app: share three to five of this week's replies on top of this story."
+  },
+  {
+   "id": "2026-11-09-0830-story",
+   "post_at": "2026-11-09T08:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-09-0830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/22 Mon 9 Nov 1 - Question 04.jpg"
+  },
+  {
+   "id": "2026-11-09-1230-story",
+   "post_at": "2026-11-09T12:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-09-1230-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/22 Mon 9 Nov 2 - Try this.jpg"
+  },
+  {
+   "id": "2026-11-09-1930-reel",
+   "post_at": "2026-11-09T19:30:00+00:00",
+   "type": "reel",
+   "media": "2026-11-09-1930-reel.mp4",
+   "cover": "2026-11-09-1930-reel-cover.jpg",
+   "caption": "What’s a word from another language you wish everyone had?\n\nSome languages have one word for a feeling that takes a whole sentence anywhere else. Some have a word for a time of day, a kind of weather, or the friend you’d ring at 2am.\n\nTell us the word, where it’s from and what it means. We’ll share a few on Sunday.\n\nA new question every Monday.",
+   "first_comment": "#languagelover #wordsmatter #conversationstarters #connection #profluency",
+   "source": "Reels/22 Mon 9 Nov - Question of the week 04 (Reel).mp4"
+  },
+  {
+   "id": "2026-11-10-0830-story",
+   "post_at": "2026-11-10T08:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-10-0830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/23 Tue 10 Nov 1 - Connection tip.jpg"
+  },
+  {
+   "id": "2026-11-10-1830-story",
+   "post_at": "2026-11-10T18:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-10-1830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/23 Tue 10 Nov 2 - Draw a card.jpg"
+  },
+  {
+   "id": "2026-11-11-0830-story",
+   "post_at": "2026-11-11T08:30:00+00:00",
+   "type": "story_image",
+   "media": "2026-11-11-0830-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/24 Wed 11 Nov 1 - Guess the phrase.jpg"
+  },
+  {
+   "id": "2026-11-11-1300-story",
+   "post_at": "2026-11-11T13:00:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-11-1300-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/24 Wed 11 Nov 2 - Beginner card.jpg"
+  },
+  {
+   "id": "2026-11-11-1800-story",
+   "post_at": "2026-11-11T18:00:00+00:00",
+   "type": "story_image",
+   "media": "2026-11-11-1800-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/24 Wed 11 Nov 3 - Beginner waitlist.jpg"
+  },
+  {
+   "id": "2026-11-11-1930-reel",
+   "post_at": "2026-11-11T19:30:00+00:00",
+   "type": "reel",
+   "media": "2026-11-11-1930-reel.mp4",
+   "cover": "2026-11-11-1930-reel-cover.jpg",
+   "caption": "A mal tiempo, buena cara. Inglés: Put a brave face on bad weather.\n\nVery handy in a British November. It works for actual rain and for everything else: a cancelled train, a long week, a conversation that didn’t go to plan.\n\nTry it the next time a friend’s having a rough day: “Venga, a mal tiempo, buena cara.” Come on, chin up.\n\nWhat gets you through a grey week? Tell us below.",
+   "first_comment": "#learnspanish #spanishphrases #aprenderespañol #spanishsayings #dimemas",
+   "source": "Reels/24 Wed 11 Nov - Frase de la semana (Reel).mp4"
+  },
+  {
+   "id": "2026-11-12-0830-story",
+   "post_at": "2026-11-12T08:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-12-0830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/25 Thu 12 Nov 1 - Insight 04.jpg"
+  },
+  {
+   "id": "2026-11-12-1830-story",
+   "post_at": "2026-11-12T18:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-12-1830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/25 Thu 12 Nov 2 - Follow-up card.jpg"
+  },
+  {
+   "id": "2026-11-13-0830-story",
+   "post_at": "2026-11-13T08:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-13-0830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/26 Fri 13 Nov 1 - World Kindness Day.jpg"
+  },
+  {
+   "id": "2026-11-13-1230-story",
+   "post_at": "2026-11-13T12:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-13-1230-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/26 Fri 13 Nov 2 - Friday card.jpg"
+  },
+  {
+   "id": "2026-11-13-1930-post",
+   "post_at": "2026-11-13T19:30:00+00:00",
+   "type": "post",
+   "media": "2026-11-13-1930-post.jpg",
+   "caption": "Ask someone how they really are. Then wait for the answer.\n\nIt’s World Kindness Day. Often the kindest thing in a conversation is the simplest: a real question, and the patience to hear all of the answer, even when it takes a while to arrive.\n\nWho will you ask today?",
+   "first_comment": "#worldkindnessday #kindness #connection #meaningfulconversations #profluency",
+   "source": "Feed posts/26 Fri 13 Nov - World Kindness Day.jpg"
+  },
+  {
+   "id": "2026-11-14-0930-story",
+   "post_at": "2026-11-14T09:30:00+00:00",
+   "type": "story_image",
+   "media": "2026-11-14-0930-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/27 Sat 14 Nov 1 - Journal.jpg"
+  },
+  {
+   "id": "2026-11-14-1300-story",
+   "post_at": "2026-11-14T13:00:00+00:00",
+   "type": "story_image",
+   "media": "2026-11-14-1300-story.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/27 Sat 14 Nov 2 - Six weeks to Christmas.jpg"
+  },
+  {
+   "id": "2026-11-15-1000-story",
+   "post_at": "2026-11-15T10:00:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-15-1000-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/28 Sun 15 Nov 1 - Did you know 03.jpg"
+  },
+  {
+   "id": "2026-11-15-1300-story",
+   "post_at": "2026-11-15T13:00:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-15-1300-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/28 Sun 15 Nov 2 - Your turn.jpg"
+  },
+  {
+   "id": "2026-11-15-1830-story",
+   "post_at": "2026-11-15T18:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-15-1830-story.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "Stories/28 Sun 15 Nov 3 - Your answers.jpg",
+   "manual": "Post from the Instagram app: share three to five of this week's replies on top of this story."
+  }
+ ]
+}

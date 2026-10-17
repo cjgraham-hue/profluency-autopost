@@ -1,0 +1,48 @@
+name: Instagram autopost
+
+on:
+  schedule:
+    - cron: '*/15 6-20 * * *'     # every 15 minutes, 06:00–20:59 UTC (covers 07:00–21:59 in BST and GMT)
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'check, dry-run or post'
+        default: 'dry-run'
+
+permissions:
+  contents: write    # to save posted.json
+  issues: write      # to open an issue (and email you) when something needs doing by hand
+
+concurrency:
+  group: autopost
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Post what is due
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL }}
+          REPORT_FILE: report.md
+        run: |
+          MODE="${{ github.event.inputs.mode }}"
+          if [ "$MODE" = "check" ]; then python3 publish.py --check
+          elif [ "$MODE" = "dry-run" ]; then python3 publish.py --dry-run
+          else python3 publish.py; fi
+      - name: Save what was posted
+        if: always()
+        run: |
+          git config user.name "autopost"; git config user.email "autopost@users.noreply.github.com"
+          git add posted.json
+          git diff --cached --quiet || (git commit -m "Posted $(date -u +%Y-%m-%dT%H:%MZ)" && git push)
+      - name: Tell Cameron if something needs doing by hand
+        if: always() && hashFiles('report.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create --title "Instagram – something to do by hand ($(TZ=Europe/London date +'%a %d %b %H:%M'))" --body-file report.md
