@@ -152,7 +152,7 @@ def main(argv):
             report.append(f"- **Failed** {it['source']} ({e}). It will be tried again on the next run until {(at + WINDOW).strftime('%H:%M')}.")
     if not dry: save_state(state)
     if report:
-        text = 'Instagram autopost update:\n\n' + '\n'.join(report) + '\n'
+        text = 'Instagram autopost update for @cjgraham-hue:\n\n' + '\n'.join(report) + '\n'
         print(text)
         out = os.environ.get('REPORT_FILE')
         if out: open(out, 'w', encoding='utf-8').write(text)
