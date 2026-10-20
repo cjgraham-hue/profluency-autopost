@@ -496,10 +496,10 @@
    "id": "2026-11-02-1230-story",
    "post_at": "2026-11-02T12:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-02-1230-story.mp4",
+   "media": "2026-11-02-1230-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/15 Mon 2 Nov 2 - Try this.jpg"
+   "source": "2026-10-21 restyle/2026-11-02-1230-story-v2.mp4"
   },
   {
    "id": "2026-11-02-1830-story",
@@ -523,10 +523,10 @@
    "id": "2026-11-03-0830-story",
    "post_at": "2026-11-03T08:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-03-0830-story.mp4",
+   "media": "2026-11-03-0830-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/16 Tue 3 Nov 1 - Connection tip.jpg"
+   "source": "2026-10-21 restyle/2026-11-03-0830-story-v2.mp4"
   },
   {
    "id": "2026-11-03-1830-story",
@@ -538,13 +538,22 @@
    "source": "Stories/16 Tue 3 Nov 2 - Draw a card.jpg"
   },
   {
+   "id": "2026-11-03-1930-post",
+   "post_at": "2026-11-03T19:30:00+00:00",
+   "type": "post",
+   "media": "2026-11-03-1930-post-v2.jpg",
+   "caption": "Lean in. Ask the second question.\n\nThe first question is polite. The second one shows you were listening: “What was that like?”, “And then what happened?”\n\nTry it once this week, and tell us what you heard.",
+   "first_comment": "#conversationtips #listening #connection #meaningfulconversations #profluency",
+   "source": "2026-10-21 restyle/2026-11-03-1930-post-v2.jpg"
+  },
+  {
    "id": "2026-11-04-0830-story",
    "post_at": "2026-11-04T08:30:00+00:00",
-   "type": "story_image",
-   "media": "2026-11-04-0830-story.jpg",
+   "type": "story_video",
+   "media": "2026-11-04-0830-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/17 Wed 4 Nov 1 - Guess the phrase.jpg"
+   "source": "2026-10-21 restyle/2026-11-04-0830-story-v2.mp4"
   },
   {
    "id": "2026-11-04-1230-story",
@@ -559,29 +568,29 @@
    "id": "2026-11-04-1930-reel",
    "post_at": "2026-11-04T19:30:00+00:00",
    "type": "reel",
-   "media": "2026-11-04-1930-reel.mp4",
-   "cover": "2026-11-04-1930-reel-cover.jpg",
+   "media": "2026-11-04-1930-reel-v2.mp4",
+   "cover": "2026-11-04-1930-reel-v2-cover.jpg",
    "caption": "Poco a poco se va lejos. Inglés: Little by little, you go a long way.\n\nThe one to remember on the days Spanish feels slow. Ten minutes and one question count. So does one line in a notebook.\n\nSay it to someone who’s learning something new this week: “Poco a poco se va lejos.”\n\nWhat are you building up, poco a poco? Tell us below.",
    "first_comment": "#learnspanish #spanishphrases #aprenderespañol #languagelearning #dimemas",
-   "source": "Reels/17 Wed 4 Nov - Frase de la semana (Reel).mp4"
+   "source": "2026-10-21 restyle/2026-11-04-1930-reel-v2.mp4"
   },
   {
    "id": "2026-11-05-0830-story",
    "post_at": "2026-11-05T08:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-05-0830-story.mp4",
+   "media": "2026-11-05-0830-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/18 Thu 5 Nov 1 - Insight 03.jpg"
+   "source": "2026-10-21 restyle/2026-11-05-0830-story-v2.mp4"
   },
   {
    "id": "2026-11-05-1800-story",
    "post_at": "2026-11-05T18:00:00+00:00",
    "type": "story_video",
-   "media": "2026-11-05-1800-story.mp4",
+   "media": "2026-11-05-1800-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/18 Thu 5 Nov 2 - Bonfire Night.jpg"
+   "source": "2026-10-21 restyle/2026-11-05-1800-story-v2.mp4"
   },
   {
    "id": "2026-11-06-1230-story",
@@ -596,10 +605,10 @@
    "id": "2026-11-06-1730-story",
    "post_at": "2026-11-06T17:30:00+00:00",
    "type": "story_image",
-   "media": "2026-11-06-1730-story.jpg",
+   "media": "2026-11-06-1730-story-v2.jpg",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/19 Fri 6 Nov 2 - How to play.jpg"
+   "source": "2026-10-21 restyle/2026-11-06-1730-story-v2.jpg"
   },
   {
    "id": "2026-11-06-1930-reel",
@@ -612,6 +621,16 @@
    "source": "Reels/19 Fri 6 Nov - Friday card (Reel).mp4"
   },
   {
+   "id": "2026-11-07-0830-story",
+   "post_at": "2026-11-07T08:30:00+00:00",
+   "type": "story_image",
+   "media": "2026-11-07-0830-story-v2.jpg",
+   "caption": "",
+   "first_comment": "",
+   "source": "2026-10-21 restyle/2026-11-07-0830-story-v2.jpg",
+   "follow_up": "This story was made for a question sticker (\"Answer in the box below\"). To add it, save the story from Instagram, then post it again with the sticker."
+  },
+  {
    "id": "2026-11-07-0930-story",
    "post_at": "2026-11-07T09:30:00+00:00",
    "type": "story_image",
@@ -621,13 +640,31 @@
    "source": "Stories/20 Sat 7 Nov 1 - Journal.jpg"
   },
   {
+   "id": "2026-11-07-1030-post",
+   "post_at": "2026-11-07T10:30:00+00:00",
+   "type": "post",
+   "media": "2026-11-07-1030-post-v2.jpg",
+   "caption": "Who was the last person who really heard you?\n\nNot just listened while they waited to talk. Heard you, and asked one more question.\n\nTell us about them in the comments, and if you can, tell them too.",
+   "first_comment": "#conversationstarters #listening #connection #belonging #profluency",
+   "source": "2026-10-21 restyle/2026-11-07-1030-post-v2.jpg"
+  },
+  {
    "id": "2026-11-07-1300-story",
    "post_at": "2026-11-07T13:00:00+00:00",
    "type": "story_image",
-   "media": "2026-11-07-1300-story.jpg",
+   "media": "2026-11-07-1300-story-v2.jpg",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/20 Sat 7 Nov 2 - Journal waitlist.jpg"
+   "source": "2026-10-21 restyle/2026-11-07-1300-story-v2.jpg"
+  },
+  {
+   "id": "2026-11-08-0830-story",
+   "post_at": "2026-11-08T08:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-11-08-0830-story-v2.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "2026-10-21 restyle/2026-11-08-0830-story-v2.mp4"
   },
   {
    "id": "2026-11-08-1300-story",
@@ -642,10 +679,10 @@
    "id": "2026-11-08-1830-story",
    "post_at": "2026-11-08T18:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-08-1830-story.mp4",
+   "media": "2026-11-08-1830-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/21 Sun 8 Nov 2 - Your answers.jpg",
+   "source": "2026-10-21 restyle/2026-11-08-1830-story-v2.mp4",
    "follow_up": "This story was made to have three to five of this week's replies on top. Save it from Instagram, then post it again with the replies, or share the replies as stories of their own."
   },
   {
