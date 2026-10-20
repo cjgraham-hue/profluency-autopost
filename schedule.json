@@ -698,10 +698,10 @@
    "id": "2026-11-09-1230-story",
    "post_at": "2026-11-09T12:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-09-1230-story.mp4",
+   "media": "2026-11-09-1230-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/22 Mon 9 Nov 2 - Try this.jpg"
+   "source": "2026-10-21 restyle/2026-11-09-1230-story-v2.mp4"
   },
   {
    "id": "2026-11-09-1930-reel",
@@ -717,10 +717,10 @@
    "id": "2026-11-10-0830-story",
    "post_at": "2026-11-10T08:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-10-0830-story.mp4",
+   "media": "2026-11-10-0830-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/23 Tue 10 Nov 1 - Connection tip.jpg"
+   "source": "2026-10-21 restyle/2026-11-10-0830-story-v2.mp4"
   },
   {
    "id": "2026-11-10-1830-story",
@@ -732,13 +732,22 @@
    "source": "Stories/23 Tue 10 Nov 2 - Draw a card.jpg"
   },
   {
+   "id": "2026-11-10-1930-post",
+   "post_at": "2026-11-10T19:30:00+00:00",
+   "type": "post",
+   "media": "2026-11-10-1930-post-v2.jpg",
+   "caption": "Quien tiene un amigo tiene un tesoro. Inglés: Whoever has a friend has a treasure.\n\nOne of the first sayings many Spanish children learn, and one that stays true.\n\nWho is your treasure? Tag them below.",
+   "first_comment": "#learnspanish #spanishphrases #aprenderespañol #spanishsayings #dimemas",
+   "source": "2026-10-21 restyle/2026-11-10-1930-post-v2.jpg"
+  },
+  {
    "id": "2026-11-11-0830-story",
    "post_at": "2026-11-11T08:30:00+00:00",
-   "type": "story_image",
-   "media": "2026-11-11-0830-story.jpg",
+   "type": "story_video",
+   "media": "2026-11-11-0830-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/24 Wed 11 Nov 1 - Guess the phrase.jpg"
+   "source": "2026-10-21 restyle/2026-11-11-0830-story-v2.mp4"
   },
   {
    "id": "2026-11-11-1300-story",
@@ -762,20 +771,20 @@
    "id": "2026-11-11-1930-reel",
    "post_at": "2026-11-11T19:30:00+00:00",
    "type": "reel",
-   "media": "2026-11-11-1930-reel.mp4",
-   "cover": "2026-11-11-1930-reel-cover.jpg",
+   "media": "2026-11-11-1930-reel-v2.mp4",
+   "cover": "2026-11-11-1930-reel-v2-cover.jpg",
    "caption": "A mal tiempo, buena cara. Inglés: Put a brave face on bad weather.\n\nVery handy in a British November. It works for actual rain and for everything else: a cancelled train, a long week, a conversation that didn’t go to plan.\n\nTry it the next time a friend’s having a rough day: “Venga, a mal tiempo, buena cara.” Come on, chin up.\n\nWhat gets you through a grey week? Tell us below.",
    "first_comment": "#learnspanish #spanishphrases #aprenderespañol #spanishsayings #dimemas",
-   "source": "Reels/24 Wed 11 Nov - Frase de la semana (Reel).mp4"
+   "source": "2026-10-21 restyle/2026-11-11-1930-reel-v2.mp4"
   },
   {
    "id": "2026-11-12-0830-story",
    "post_at": "2026-11-12T08:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-12-0830-story.mp4",
+   "media": "2026-11-12-0830-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/25 Thu 12 Nov 1 - Insight 04.jpg"
+   "source": "2026-10-21 restyle/2026-11-12-0830-story-v2.mp4"
   },
   {
    "id": "2026-11-12-1830-story",
@@ -790,10 +799,10 @@
    "id": "2026-11-13-0830-story",
    "post_at": "2026-11-13T08:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-13-0830-story.mp4",
+   "media": "2026-11-13-0830-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/26 Fri 13 Nov 1 - World Kindness Day.jpg"
+   "source": "2026-10-21 restyle/2026-11-13-0830-story-v2.mp4"
   },
   {
    "id": "2026-11-13-1230-story",
@@ -835,10 +844,19 @@
    "id": "2026-11-15-1000-story",
    "post_at": "2026-11-15T10:00:00+00:00",
    "type": "story_video",
-   "media": "2026-11-15-1000-story.mp4",
+   "media": "2026-11-15-1000-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/28 Sun 15 Nov 1 - Did you know 03.jpg"
+   "source": "2026-10-21 restyle/2026-11-15-1000-story-v2.mp4"
+  },
+  {
+   "id": "2026-11-15-1030-post",
+   "post_at": "2026-11-15T10:30:00+00:00",
+   "type": "post",
+   "media": "2026-11-15-1030-post-v2.jpg",
+   "caption": "Some conversations stay with you for years.\n\nThis is the last week of “Pull up a chair”. Thank you for every answer, every story and every name you shared with us.\n\nWho is the conversation you still think of?",
+   "first_comment": "#meaningfulconversations #connection #sundaythoughts #belonging #profluency",
+   "source": "2026-10-21 restyle/2026-11-15-1030-post-v2.jpg"
   },
   {
    "id": "2026-11-15-1300-story",
@@ -853,10 +871,10 @@
    "id": "2026-11-15-1830-story",
    "post_at": "2026-11-15T18:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-15-1830-story.mp4",
+   "media": "2026-11-15-1830-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/28 Sun 15 Nov 3 - Your answers.jpg",
+   "source": "2026-10-21 restyle/2026-11-15-1830-story-v2.mp4",
    "follow_up": "This story was made to have three to five of this week's replies on top. Save it from Instagram, then post it again with the replies, or share the replies as stories of their own."
   },
   {
