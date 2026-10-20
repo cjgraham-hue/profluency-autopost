@@ -16,6 +16,10 @@ Usage
   python3 publish.py                  post everything that is due
   python3 publish.py --only ID        post one item now (e.g. a test), whatever its time
   python3 publish.py --list           the whole schedule, with what's been posted
+
+Schedule items can carry "follow_up": a note emailed to Cameron (as a GitHub issue) once the item has been posted,
+e.g. a sticker to add by downloading the story and posting it again. Items with "manual" are not posted at all;
+they are emailed at their time instead.
 """
 import json, os, sys, time, urllib.request, urllib.parse, urllib.error, datetime as dt
 from zoneinfo import ZoneInfo
@@ -142,12 +146,13 @@ def main(argv):
             state[it['id']] = dict(status='posted', media_id=mid, at=now.isoformat(), note=note); save_state(state)
             print('Posted', it['id'], mid);
             if note: report.append(f"- {it['source']}: {note}")
+            if it.get('follow_up'): report.append(f"- **Posted** {at.strftime('%a %d %b %H:%M')} · {it['source']}. Follow-up, if you want it: {it['follow_up']}")
         except Exception as e:
             print('FAILED', it['id'], e)
             report.append(f"- **Failed** {it['source']} ({e}). It will be tried again on the next run until {(at + WINDOW).strftime('%H:%M')}.")
     if not dry: save_state(state)
     if report:
-        text = 'Instagram autopost needs you:\n\n' + '\n'.join(report) + '\n'
+        text = 'Instagram autopost update:\n\n' + '\n'.join(report) + '\n'
         print(text)
         out = os.environ.get('REPORT_FILE')
         if out: open(out, 'w', encoding='utf-8').write(text)

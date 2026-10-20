@@ -2,7 +2,7 @@
 
 Posts the "Pull up a chair" month (Mon 19 Oct – Sun 15 Nov 2026) to @profluencyuk by itself: 74 items (58 stories, 8 feed posts, 8 Reels), each at its planned UK time, with the hashtags added as the first comment. Your computer can be off. It runs free on GitHub: every 15 minutes a small script (`publish.py`) checks the schedule and posts whatever is due through Instagram's official API.
 
-11 stories can't be automated and stay with you. 7 week-1 stories were made for stickers (question, poll, countdown, link), and the API can't add stickers. The 4 Sunday "Your answers" stories need your followers' real replies on top. At the time each one is due, GitHub opens an issue, which emails you: "Post by hand now", with the file name. The files are in the month folder.
+Everything posts automatically, including the stories that were made for stickers (question, poll, countdown, link) and the Sunday "Your answers" stories. The API can't add stickers or other people's replies, so those items carry a `follow_up` note: once one has posted, GitHub opens an issue, which emails you what it was made for. If you want the sticker, save the story from Instagram and post it again with the sticker. An item with `"manual"` instead of `"follow_up"` is never posted: you're emailed at its time to post it yourself.
 
 ## What's here
 
@@ -24,7 +24,7 @@ Once that's done, it starts by itself. The first automatic post is **Mon 19 Oct 
 ## Good to know
 
 - **Timing:** posts go out within about 15 minutes of the planned time. GitHub's timer can occasionally run late. If a post is more than 3 hours late it's skipped, and you get an email instead, so nothing lands at a strange hour.
-- **Reels are silent:** the API can't add music from Instagram's library. If you want a trending sound on a Reel, set that Reel to by hand: add `"manual": "Add a sound"` to it in `schedule.json`.
+- **Reels are silent:** the API can't add music from Instagram's library. If you want a trending sound on a Reel, either set that Reel to by hand (add `"manual": "Add a sound"` to it in `schedule.json`), or let it post and add a sound afterwards from the app.
 - **Public repo:** the files and captions can be seen by anyone who finds the repository before they're posted. If that matters, keep the repo private and host `docs/media` on profluency.co.uk instead (then set `MEDIA_BASE_URL` to that folder). The 15-minute timer stays inside GitHub's free private allowance.
 - **Changing a post:** edit `schedule.json` (text, time) or replace a file in `docs/media`, then commit. To stop everything, disable the workflow in Actions.
 - **Commands** (run with the three settings in your environment): `python3 publish.py --check`, `--dry-run`, `--list`, or `--only <id>` to post one item now.
