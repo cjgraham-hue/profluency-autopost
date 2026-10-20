@@ -29,3 +29,5 @@ Once that's done, it starts by itself. The first automatic post is **Mon 19 Oct 
 - **Changing a post:** edit `schedule.json` (text, time) or replace a file in `docs/media`, then commit. To stop everything, disable the workflow in Actions.
 - **Commands** (run with the three settings in your environment): `python3 publish.py --check`, `--dry-run`, `--list`, or `--only <id>` to post one item now.
 - **Limits:** Instagram allows 50 API posts per 24 hours. The busiest day here has 4.
+- **Token renewal:** `.github/workflows/refresh-token.yml` renews the Instagram token on the 1st and 15th of each month and writes the new expiry date to `token-status.json`. It needs one secret, `SECRETS_WRITER_TOKEN`: a fine-grained GitHub token for this repo only, with "Secrets: Read and write". If a renewal fails, you get an issue email.
+- **New months:** Claude makes each month (plan, artwork, animations, InDesign backup in Drive) and, once you say "schedule it", adds the media to `docs/media` and the posts to `schedule.json` here.
