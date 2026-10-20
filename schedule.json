@@ -890,10 +890,10 @@
    "id": "2026-11-16-1230-story",
    "post_at": "2026-11-16T12:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-16-1230-story.mp4",
+   "media": "2026-11-16-1230-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Animated stories/01 Mon 16 Nov 2 - Try this (animated).mp4"
+   "source": "2026-10-21 restyle/2026-11-16-1230-story-v2.mp4"
   },
   {
    "id": "2026-11-16-1830-story",
@@ -918,19 +918,19 @@
    "id": "2026-11-17-0830-story",
    "post_at": "2026-11-17T08:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-17-0830-story.mp4",
+   "media": "2026-11-17-0830-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Animated stories/02 Tue 17 Nov 1 - Connection tip (animated).mp4"
+   "source": "2026-10-21 restyle/2026-11-17-0830-story-v2.mp4"
   },
   {
    "id": "2026-11-17-1230-story",
    "post_at": "2026-11-17T12:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-17-1230-story.mp4",
+   "media": "2026-11-17-1230-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Animated stories/02 Tue 17 Nov 2 - From the Journal (animated).mp4",
+   "source": "2026-10-21 restyle/2026-11-17-1230-story-v2.mp4",
    "follow_up": "This story was made for a link sticker to https://profluency.co.uk/journal/they-liked-you-more-than-you-think/. To add it, save the story from Instagram, then post it again with the sticker."
   },
   {
@@ -946,10 +946,10 @@
    "id": "2026-11-18-0830-story",
    "post_at": "2026-11-18T08:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-18-0830-story.mp4",
+   "media": "2026-11-18-0830-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Animated stories/03 Wed 18 Nov 1 - Guess the phrase (animated).mp4"
+   "source": "2026-10-21 restyle/2026-11-18-0830-story-v2.mp4"
   },
   {
    "id": "2026-11-18-1230-story",
@@ -964,20 +964,20 @@
    "id": "2026-11-18-1830-story",
    "post_at": "2026-11-18T18:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-18-1830-story.mp4",
+   "media": "2026-11-18-1830-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Animated stories/03 Wed 18 Nov 3 - 20 free questions (animated).mp4"
+   "source": "2026-10-21 restyle/2026-11-18-1830-story-v2.mp4"
   },
   {
    "id": "2026-11-18-1930-reel",
    "post_at": "2026-11-18T19:30:00+00:00",
    "type": "reel",
-   "media": "2026-11-18-1930-reel.mp4",
-   "cover": "2026-11-18-1930-reel-cover.jpg",
-   "caption": "Quien tiene boca se equivoca. Inglés: Everyone makes mistakes.\n\nWord for word: whoever has a mouth gets things wrong. It’s what you say when someone mixes up a word and goes red. Nobody speaks without slipping, in any language, so say it anyway.\n\nIt’s the saying for week 19 of the Dime Más Journal: “Equivocarse forma parte de hablar.” Making mistakes is part of speaking.\n\nWhat’s your favourite mistake in another language? Tell us below.",
+   "media": "2026-11-18-1930-reel-v2.mp4",
+   "cover": "2026-11-18-1930-reel-v2-cover.jpg",
+   "caption": "Quien tiene boca se equivoca. Inglés: Everyone makes mistakes.\n\nWord for word: whoever has a mouth gets things wrong. It’s what you say when someone mixes up a word and goes red. Nobody speaks without slipping, in any language, so say it anyway.\n\nOr, as we like to put it: “Equivocarse forma parte de hablar.” Making mistakes is part of speaking.\n\nWhat’s your favourite mistake in another language? Tell us below.",
    "first_comment": "#learnspanish #spanishphrases #aprenderespañol #spanishsayings #dimemas",
-   "source": "Reels/03 Wed 18 Nov - Frase de la semana (Reel).mp4"
+   "source": "2026-10-21 restyle/2026-11-18-1930-reel-v2.mp4"
   },
   {
    "id": "2026-11-19-0830-story",
@@ -992,10 +992,10 @@
    "id": "2026-11-19-1230-story",
    "post_at": "2026-11-19T12:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-19-1230-story.mp4",
+   "media": "2026-11-19-1230-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Animated stories/04 Thu 19 Nov 2 - World Philosophy Day (animated).mp4"
+   "source": "2026-10-21 restyle/2026-11-19-1230-story-v2.mp4"
   },
   {
    "id": "2026-11-19-1830-story",
@@ -1019,10 +1019,10 @@
    "id": "2026-11-20-1730-story",
    "post_at": "2026-11-20T17:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-20-1730-story.mp4",
+   "media": "2026-11-20-1730-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Animated stories/05 Fri 20 Nov 2 - Tomorrow (animated).mp4"
+   "source": "2026-10-21 restyle/2026-11-20-1730-story-v2.mp4"
   },
   {
    "id": "2026-11-20-1930-reel",
@@ -1047,29 +1047,29 @@
    "id": "2026-11-21-1030-reel",
    "post_at": "2026-11-21T10:30:00+00:00",
    "type": "reel",
-   "media": "2026-11-21-1030-reel.mp4",
-   "cover": "2026-11-21-1030-reel-cover.jpg",
+   "media": "2026-11-21-1030-reel-v2.mp4",
+   "cover": "2026-11-21-1030-reel-v2-cover.jpg",
    "caption": "Hello is where every conversation starts.\n\nWorld Hello Day began in 1973, when two brothers, Brian and Michael McCormack, wrote to world leaders in seven languages about the importance of talking to each other. The idea is simple: say hello to at least ten people today.\n\nThe neighbour, the bus driver, the person you always nod to but never speak to. Who’s first?",
    "first_comment": "#worldhelloday #hello #connection #conversationstarters #profluency",
-   "source": "Animated feed posts/06 Sat 21 Nov - World Hello Day (animated).mp4"
+   "source": "2026-10-21 restyle/2026-11-21-1030-reel-v2.mp4"
   },
   {
    "id": "2026-11-21-1300-story",
    "post_at": "2026-11-21T13:00:00+00:00",
    "type": "story_video",
-   "media": "2026-11-21-1300-story.mp4",
+   "media": "2026-11-21-1300-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Animated stories/06 Sat 21 Nov 2 - World Hello Day (animated).mp4"
+   "source": "2026-10-21 restyle/2026-11-21-1300-story-v2.mp4"
   },
   {
    "id": "2026-11-22-1000-story",
    "post_at": "2026-11-22T10:00:00+00:00",
    "type": "story_video",
-   "media": "2026-11-22-1000-story.mp4",
+   "media": "2026-11-22-1000-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Animated stories/07 Sun 22 Nov 1 - Did you know 04 (animated).mp4"
+   "source": "2026-10-21 restyle/2026-11-22-1000-story-v2.mp4"
   },
   {
    "id": "2026-11-22-1300-story",
@@ -1084,10 +1084,10 @@
    "id": "2026-11-22-1830-story",
    "post_at": "2026-11-22T18:30:00+00:00",
    "type": "story_image",
-   "media": "2026-11-22-1830-story.jpg",
+   "media": "2026-11-22-1830-story-v2.jpg",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/07 Sun 22 Nov 3 - Your answers.jpg",
+   "source": "2026-10-21 restyle/2026-11-22-1830-story-v2.jpg",
    "follow_up": "This story was made to have three to five of this week's replies on top. Save it from Instagram, then post it again with the replies, or share the replies as stories of their own."
   },
   {
