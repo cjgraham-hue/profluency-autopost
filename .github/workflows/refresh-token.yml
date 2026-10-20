@@ -1,0 +1,69 @@
+name: Refresh Instagram token
+
+# The Instagram token lasts 60 days. This renews it on the 1st and 15th of every month, saves the new one as the
+# IG_ACCESS_TOKEN secret, and records the new expiry date in token-status.json. It needs one extra secret,
+# SECRETS_WRITER_TOKEN: a fine-grained GitHub token for this repo only, with "Secrets: Read and write".
+# If anything fails, it opens an issue that mentions @cjgraham-hue, so GitHub emails him.
+
+on:
+  schedule:
+    - cron: '17 3 1,15 * *'      # 03:17 UTC on the 1st and 15th
+  workflow_dispatch:
+
+permissions:
+  contents: write    # to save token-status.json
+  issues: write      # to email Cameron if something goes wrong
+
+concurrency:
+  group: token-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Renew the token and save it
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          GH_TOKEN: ${{ secrets.SECRETS_WRITER_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          python3 - <<'PY'
+          import json, os, subprocess, sys, urllib.parse, urllib.request, urllib.error, datetime as dt
+          old = os.environ.get('IG_ACCESS_TOKEN', '').strip()
+          if not os.environ.get('GH_TOKEN', '').strip():
+              sys.exit('SECRETS_WRITER_TOKEN is not set up yet, so the token was not renewed.')
+          if not old:
+              sys.exit('IG_ACCESS_TOKEN is missing.')
+          url = 'https://graph.instagram.com/refresh_access_token?' + urllib.parse.urlencode(
+              {'grant_type': 'ig_refresh_token', 'access_token': old})
+          try:
+              with urllib.request.urlopen(url, timeout=60) as r: data = json.loads(r.read().decode())
+          except urllib.error.HTTPError as e:
+              body = e.read().decode(errors='replace')
+              try: msg = json.loads(body).get('error', {}).get('message', body)
+              except ValueError: msg = body
+              sys.exit(f'Instagram refused the renewal: {e.code} {msg}')
+          new = data.get('access_token', '').strip()
+          if not new: sys.exit('Instagram did not return a token.')
+          print('::add-mask::' + new)
+          subprocess.run(['gh', 'secret', 'set', 'IG_ACCESS_TOKEN', '--repo', os.environ['REPO']], input=new, text=True, check=True)
+          now = dt.datetime.now(dt.timezone.utc)
+          expires = now + dt.timedelta(seconds=int(data.get('expires_in', 0)))
+          json.dump({'renewed_at': now.isoformat(timespec='minutes'), 'expires_on': expires.date().isoformat(),
+                     'same_token_returned': new == old}, open('token-status.json', 'w'), indent=1)
+          print('Token renewed. New expiry:', expires.date().isoformat())
+          PY
+      - name: Save the new expiry date
+        run: |
+          git config user.name "autopost"; git config user.email "autopost@users.noreply.github.com"
+          git add token-status.json
+          git diff --cached --quiet || (git commit -m "Instagram token renewed" && (git push || (git pull --rebase && git push)))
+      - name: Tell Cameron if it failed
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          printf 'The Instagram token could not be renewed automatically, @cjgraham-hue. Posting carries on until the current token expires (see token-status.json). Open the failed run in Actions to see why.\n\n%s/%s/actions/runs/%s\n' "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" > fail.md
+          gh issue create --title "Instagram token renewal failed" --body-file fail.md
