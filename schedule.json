@@ -277,10 +277,10 @@
    "id": "2026-10-26-1230-story",
    "post_at": "2026-10-26T12:30:00+00:00",
    "type": "story_video",
-   "media": "2026-10-26-1230-story.mp4",
+   "media": "2026-10-26-1230-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/08 Mon 26 Oct 2 - Try this.jpg"
+   "source": "2026-10-21 restyle/2026-10-26-1230-story-v2.mp4"
   },
   {
    "id": "2026-10-26-1930-reel",
@@ -296,10 +296,10 @@
    "id": "2026-10-27-0830-story",
    "post_at": "2026-10-27T08:30:00+00:00",
    "type": "story_video",
-   "media": "2026-10-27-0830-story.mp4",
+   "media": "2026-10-27-0830-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/09 Tue 27 Oct 1 - Connection tip.jpg"
+   "source": "2026-10-21 restyle/2026-10-27-0830-story-v2.mp4"
   },
   {
    "id": "2026-10-27-1830-story",
@@ -311,13 +311,22 @@
    "source": "Stories/09 Tue 27 Oct 2 - Draw a card.jpg"
   },
   {
+   "id": "2026-10-27-1930-post",
+   "post_at": "2026-10-27T19:30:00+00:00",
+   "type": "post",
+   "media": "2026-10-27-1930-post-v2.jpg",
+   "caption": "The best conversations start with a pause.\n\nNot an awkward one. The small quiet after a question, when the other person is deciding how much to tell you. Leave it alone and the real answer usually arrives.\n\nWhen did a pause change a conversation for you?",
+   "first_comment": "#meaningfulconversations #listening #connection #conversationstarters #profluency",
+   "source": "2026-10-21 restyle/2026-10-27-1930-post-v2.jpg"
+  },
+  {
    "id": "2026-10-28-0830-story",
    "post_at": "2026-10-28T08:30:00+00:00",
-   "type": "story_image",
-   "media": "2026-10-28-0830-story.jpg",
+   "type": "story_video",
+   "media": "2026-10-28-0830-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/10 Wed 28 Oct 1 - Guess the phrase.jpg"
+   "source": "2026-10-21 restyle/2026-10-28-0830-story-v2.mp4"
   },
   {
    "id": "2026-10-28-1230-story",
@@ -332,10 +341,10 @@
    "id": "2026-10-28-1800-story",
    "post_at": "2026-10-28T18:00:00+00:00",
    "type": "story_image",
-   "media": "2026-10-28-1800-story.jpg",
+   "media": "2026-10-28-1800-story-v2.jpg",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/10 Wed 28 Oct 3 - The meaning.jpg"
+   "source": "2026-10-21 restyle/2026-10-28-1800-story-v2.jpg"
   },
   {
    "id": "2026-10-28-1930-reel",
@@ -357,6 +366,15 @@
    "source": "Stories/11 Thu 29 Oct 1 - Insight 02.jpg"
   },
   {
+   "id": "2026-10-29-1230-story",
+   "post_at": "2026-10-29T12:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-10-29-1230-story-v2.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "2026-10-21 restyle/2026-10-29-1230-story-v2.mp4"
+  },
+  {
    "id": "2026-10-29-1830-story",
    "post_at": "2026-10-29T18:30:00+00:00",
    "type": "story_video",
@@ -364,6 +382,15 @@
    "caption": "",
    "first_comment": "",
    "source": "Stories/11 Thu 29 Oct 2 - Your turn.jpg"
+  },
+  {
+   "id": "2026-10-30-0830-story",
+   "post_at": "2026-10-30T08:30:00+00:00",
+   "type": "story_video",
+   "media": "2026-10-30-0830-story-v2.mp4",
+   "caption": "",
+   "first_comment": "",
+   "source": "2026-10-21 restyle/2026-10-30-0830-story-v2.mp4"
   },
   {
    "id": "2026-10-30-1230-story",
@@ -384,6 +411,15 @@
    "source": "Stories/12 Fri 30 Oct 2 - Shop.jpg"
   },
   {
+   "id": "2026-10-30-1930-post",
+   "post_at": "2026-10-30T19:30:00+00:00",
+   "type": "post",
+   "media": "2026-10-30-1930-post-v2.jpg",
+   "caption": "Fuera llueve. Dentro, una pregunta. Inglés: Raining outside. Inside, one question.\n\nA wet Friday is made for staying in. Draw a card, read the question in Spanish, and see where the evening goes.\n\nDime Más Intermediate (B1–B2): 60 cards of real questions in Spanish, with English on every card. On Amazon UK, link in bio.",
+   "first_comment": "#learnspanish #conversationcards #rainyday #spanishgames #dimemas",
+   "source": "2026-10-21 restyle/2026-10-30-1930-post-v2.jpg"
+  },
+  {
    "id": "2026-10-31-0930-story",
    "post_at": "2026-10-31T09:30:00+00:00",
    "type": "story_image",
@@ -395,11 +431,11 @@
   {
    "id": "2026-10-31-1300-story",
    "post_at": "2026-10-31T13:00:00+00:00",
-   "type": "story_image",
-   "media": "2026-10-31-1300-story.jpg",
+   "type": "story_video",
+   "media": "2026-10-31-1300-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/13 Sat 31 Oct 2 - Tomorrow.jpg"
+   "source": "2026-10-21 restyle/2026-10-31-1300-story-v2.mp4"
   },
   {
    "id": "2026-10-31-1830-story",
@@ -414,19 +450,19 @@
    "id": "2026-11-01-0930-story",
    "post_at": "2026-11-01T09:30:00+00:00",
    "type": "story_image",
-   "media": "2026-11-01-0930-story.jpg",
+   "media": "2026-11-01-0930-story-v2.jpg",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/14 Sun 1 Nov 1 - 1 November.jpg"
+   "source": "2026-10-21 restyle/2026-11-01-0930-story-v2.jpg"
   },
   {
    "id": "2026-11-01-1030-post",
    "post_at": "2026-11-01T10:30:00+00:00",
    "type": "post",
-   "media": "2026-11-01-1030-post.jpg",
+   "media": "2026-11-01-1030-post-v2.jpg",
    "caption": "Hoy recordamos contando historias. Inglés: Today, we remember by telling stories.\n\nIn Spain, 1 November is el Día de Todos los Santos, All Saints’ Day. Families take flowers to the cemetery, and bakeries fill with huesos de santo (little marzipan “saints’ bones”) and buñuelos de viento (light, airy fritters).\n\nIn Mexico, el Día de Muertos runs from 1 to 2 November. Families build an ofrenda, an altar with photos, marigolds and the favourite food of the people they miss, and tell their stories out loud.\n\nWhose story would you tell today? Share it below, or tell someone at home.",
    "first_comment": "#diademuertos #todoslossantos #spanishculture #learnspanish #dimemas",
-   "source": "Feed posts/14 Sun 1 Nov - 1 November.jpg"
+   "source": "2026-10-21 restyle/2026-11-01-1030-post-v2.jpg"
   },
   {
    "id": "2026-11-01-1300-story",
@@ -441,10 +477,10 @@
    "id": "2026-11-01-1830-story",
    "post_at": "2026-11-01T18:30:00+00:00",
    "type": "story_video",
-   "media": "2026-11-01-1830-story.mp4",
+   "media": "2026-11-01-1830-story-v2.mp4",
    "caption": "",
    "first_comment": "",
-   "source": "Stories/14 Sun 1 Nov 3 - Your answers.jpg",
+   "source": "2026-10-21 restyle/2026-11-01-1830-story-v2.mp4",
    "follow_up": "This story was made to have three to five of this week's replies on top. Save it from Instagram, then post it again with the replies, or share the replies as stories of their own."
   },
   {
