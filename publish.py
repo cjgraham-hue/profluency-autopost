@@ -20,13 +20,22 @@ Usage
 Schedule items can carry "follow_up": a note emailed to Cameron (as a GitHub issue) once the item has been posted,
 e.g. a sticker to add by downloading the story and posting it again. Items with "manual" are not posted at all;
 they are emailed at their time instead.
+
+Staying clear of Instagram's automation checks (added 21 Oct 2026, after the account was flagged):
+  - each post goes out up to 12 minutes after its planned time, a different amount for each post, so the timing
+    is never exactly on the clock;
+  - the hashtag first comment waits 1 to 3 minutes after the post instead of following it within seconds;
+  - if Meta blocks access ("API access blocked", a restricted or checkpointed account, suspected spam or a dead
+    token), the run stops at once, writes pause.json and emails once. Nothing is tried again until you've sorted it
+    in the Instagram app and run the workflow with "check", which resumes posting when the account answers.
 """
-import json, os, sys, time, urllib.request, urllib.parse, urllib.error, datetime as dt
+import json, os, sys, time, random, hashlib, urllib.request, urllib.parse, urllib.error, datetime as dt
 from zoneinfo import ZoneInfo
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SCHEDULE = json.load(open(os.path.join(HERE, 'schedule.json'), encoding='utf-8'))
 STATE_FILE = os.path.join(HERE, 'posted.json')
+PAUSE_FILE = os.path.join(HERE, 'pause.json')
 LONDON = ZoneInfo('Europe/London')
 VERSION = os.environ.get('GRAPH_VERSION', 'v23.0')
 API = f'https://graph.instagram.com/{VERSION}'
@@ -36,6 +45,18 @@ def env(name):
     v = os.environ.get(name, '').strip()
     if not v: sys.exit(f'Missing setting: {name}. See README.md.')
     return v
+
+class ApiError(RuntimeError):
+    def __init__(self, method, path, http, code, subcode, msg):
+        super().__init__(f'{method} {path}: {http} {msg}')
+        self.http, self.code, self.subcode, self.msg = http, code, subcode, msg
+
+def is_block(e):
+    """Meta has stopped this app or account: retrying only makes it look more like a bot."""
+    if not isinstance(e, ApiError): return False
+    m = (e.msg or '').lower()
+    return (e.code == 190 or e.subcode in (2207050, 2207051) or 'blocked' in m or 'restricted' in m
+            or 'checkpoint' in m or 'suspicious' in m or 'spam' in m)
 
 def call(method, path, **params):
     params['access_token'] = env('IG_ACCESS_TOKEN')
@@ -47,9 +68,10 @@ def call(method, path, **params):
         with urllib.request.urlopen(req, timeout=60) as r: return json.loads(r.read().decode())
     except urllib.error.HTTPError as e:
         body = e.read().decode(errors='replace')
-        try: msg = json.loads(body).get('error', {}).get('message', body)
-        except ValueError: msg = body
-        raise RuntimeError(f'{method} {path}: {e.code} {msg}') from None
+        try: err = json.loads(body).get('error', {})
+        except ValueError: err = {}
+        if not isinstance(err, dict): err = {}
+        raise ApiError(method, path, e.code, err.get('code'), err.get('error_subcode'), err.get('message', body)) from None
 
 def media_url(name): return env('MEDIA_BASE_URL').rstrip('/') + '/' + urllib.parse.quote(name)
 
@@ -57,6 +79,21 @@ def load_state():
     try: return json.load(open(STATE_FILE, encoding='utf-8'))
     except (OSError, ValueError): return {}
 def save_state(s): json.dump(s, open(STATE_FILE, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+
+def load_pause():
+    try: return json.load(open(PAUSE_FILE, encoding='utf-8'))
+    except (OSError, ValueError): return None
+def save_pause(p): json.dump(p, open(PAUSE_FILE, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+def clear_pause():
+    if os.path.exists(PAUSE_FILE): os.remove(PAUSE_FILE); return True
+    return False
+
+def offset(it):
+    """0 to 12 minutes after the planned time, fixed for each post, so posts never land exactly on the clock."""
+    return dt.timedelta(seconds=int(hashlib.sha256(it['id'].encode()).hexdigest(), 16) % 721)
+
+def human_pause(lo, hi):
+    if os.environ.get('NO_DELAYS') != '1': time.sleep(random.uniform(lo, hi))
 
 def wait_ready(container, kind):
     """videos take a while to process; images are usually ready at once"""
@@ -80,9 +117,14 @@ def publish(it):
     else: raise RuntimeError(f'unknown type {kind}')
     container = call('POST', f'{ig}/media', **p)['id']
     wait_ready(container, kind)
-    media_id = call('POST', f'{ig}/media_publish', creation_id=container)['id']
+    for attempt in range(5):          # "Media ID is not available": Instagram isn't ready to publish yet, so wait and ask again
+        try: media_id = call('POST', f'{ig}/media_publish', creation_id=container)['id']; break
+        except ApiError as e:
+            if attempt == 4 or not (e.subcode == 2207027 or 'not available' in (e.msg or '').lower() or 'not ready' in (e.msg or '').lower()): raise
+            time.sleep(20)
     note = ''
     if it.get('first_comment'):
+        human_pause(60, 180)          # a person adds the hashtags a minute or two later, not within a second
         try: call('POST', f'{media_id}/comments', message=it['first_comment'])
         except RuntimeError as e: note = f'posted, but the first comment failed ({e}); add the hashtags by hand'
     return media_id, note
@@ -102,7 +144,11 @@ def main(argv):
         return 0
 
     if '--check' in args:
-        me = call('GET', 'me', fields='user_id,username,account_type')
+        try: me = call('GET', 'me', fields='user_id,username,account_type')
+        except ApiError as e:
+            print('Instagram refused the check:', e)
+            if is_block(e): print('Meta is still blocking access. Check the Instagram app for a notice, then run "check" again.')
+            return 1
         print('Account:', me.get('username'), '| type:', me.get('account_type'), '| id:', me.get('user_id'))
         if str(me.get('user_id')) != env('IG_USER_ID'): print('WARNING: IG_USER_ID does not match this token\'s account', me.get('user_id'))
         if me.get('account_type') not in ('BUSINESS',): print('WARNING: Stories can only be published by the API on a Business account.')
@@ -118,6 +164,7 @@ def main(argv):
                         if not (ct.startswith('image/') or ct.startswith('video/')): bad += 1; print('Not an image/video:', name, ct)
                 except Exception as e: bad += 1; print('Media link not reachable:', media_url(name), e)
         print(f'{len(items)} items in the schedule; media links checked, {bad} problem(s).')
+        if clear_pause(): print('The account answered, so posting has resumed (pause.json removed).')
         return 1 if bad else 0
 
     if '--only' in args:
@@ -128,10 +175,12 @@ def main(argv):
 
     dry = '--dry-run' in args or os.environ.get('DRY_RUN') == '1'
     now = now_london(args[args.index('--now') + 1] if '--now' in args else None)
+    paused = load_pause()
+    if paused: print(f"Posting is paused since {paused.get('since', '?')[:16]}: {paused.get('reason', '')}. Run the workflow with \"check\" to resume.")
     for it in items:
         if it['id'] in state: continue
         at = dt.datetime.fromisoformat(it['post_at'])
-        if at > now: continue
+        if at + offset(it) > now: continue
         late = now - at
         if 'manual' in it:
             report.append(f"- **{at.strftime('%a %d %b %H:%M')}** · {it['source']}: {it['manual']}")
@@ -141,6 +190,7 @@ def main(argv):
             report.append(f"- **Missed** {at.strftime('%a %d %b %H:%M')} · {it['source']} ({int(late.total_seconds() // 60)} min late, not posted). Post it by hand or run publish.py --only {it['id']}.")
             if not dry: state[it['id']] = dict(status='missed', at=now.isoformat())
             continue
+        if paused: continue            # waits; once resumed it posts if still within the window, otherwise it's reported as missed
         if dry: print('Would post', it['id'], it['type'], media_url(it['media']) if os.environ.get('MEDIA_BASE_URL') else it['media']); continue
         try:
             mid, note = publish(it)
@@ -150,6 +200,14 @@ def main(argv):
             if it.get('follow_up'): report.append(f"- **Posted** {at.strftime('%a %d %b %H:%M')} · {it['source']}. Follow-up, if you want it: {it['follow_up']}")
         except Exception as e:
             print('FAILED', it['id'], e)
+            if is_block(e) and not paused:
+                paused = dict(since=now.isoformat(), reason=str(e), item=it['id'])
+                save_pause(paused)
+                report.append(f"- **Posting paused.** Instagram refused {it['source']} ({e}). Meta has blocked this app's access to the account, "
+                              "so nothing more will be tried (retrying only looks more like a bot). Open the Instagram app and clear any notice "
+                              "(\"confirm it's you\", Settings › Account Status). Then run Actions › Instagram autopost › Run workflow with \"check\": "
+                              "if the account answers, posting resumes on the next run. Anything more than 3 hours late by then is reported as missed.")
+                break
             report.append(f"- **Failed** {it['source']} ({e}). It will be tried again on the next run until {(at + WINDOW).strftime('%H:%M')}.")
     if not dry: save_state(state)
     if report:
