@@ -110,6 +110,7 @@ def main(argv):
         print('Publishing allowance:', json.dumps(lim.get('data', lim)))
         bad = 0
         for i in items:
+            if i['id'] in state: continue      # already done: its file may have been removed by the weekly cleanup
             for name in [i['media']] + ([i['cover']] if i.get('cover') else []):
                 try:
                     with urllib.request.urlopen(urllib.request.Request(media_url(name), method='HEAD'), timeout=30) as r:
