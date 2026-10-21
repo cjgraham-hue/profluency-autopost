@@ -38,8 +38,8 @@ jobs:
         if: always()
         run: |
           git config user.name "autopost"; git config user.email "autopost@users.noreply.github.com"
-          git add posted.json
-          git diff --cached --quiet || (git commit -m "Posted $(date -u +%Y-%m-%dT%H:%MZ)" && git push)
+          git add -u; git add posted.json $(ls pause.json 2>/dev/null)     # pause.json appears when Meta blocks access, and goes after a good "check"
+          git diff --cached --quiet || (git commit -m "Posted $(date -u +%Y-%m-%dT%H:%MZ)" && (git push || (git pull --rebase && git push)))
       - name: Tell Cameron if something needs doing by hand
         if: always() && hashFiles('report.md') != ''
         env:
