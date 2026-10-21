@@ -1,0 +1,37 @@
+name: Weekly media cleanup
+
+# Every Monday before the first post, this removes last week's files from docs/media once they've been posted,
+# so the media folder (and the GitHub Pages site) only holds this week and what's still to come.
+# The originals stay in Drive's "Social media backup", and git history keeps every removed file.
+# Run it by hand from Actions with "dry-run" to see what it would remove without removing anything.
+
+on:
+  schedule:
+    - cron: '30 4 * * 1'      # 04:30 UTC on Mondays (04:30 UK time in winter, 05:30 in summer), before the first post
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'dry-run or clean'
+        default: 'dry-run'
+
+permissions:
+  contents: write    # to commit the removals
+
+concurrency:
+  group: autopost    # never at the same time as a posting run
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove finished media
+        run: |
+          if [ "${{ github.event.inputs.mode }}" = "dry-run" ]; then python3 tools/cleanup_media.py --dry-run
+          else python3 tools/cleanup_media.py; fi
+      - name: Save
+        if: github.event.inputs.mode != 'dry-run'
+        run: |
+          git config user.name "autopost"; git config user.email "autopost@users.noreply.github.com"
+          git diff --cached --quiet || (git commit -m "Media cleanup $(TZ=Europe/London date +'%a %d %b')" && git push)
