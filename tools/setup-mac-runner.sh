@@ -64,13 +64,23 @@ fi
 if [ ! -f ./.runner ]; then
   say "Now get a one-off code from GitHub:"
   echo "  1. Open $REPO_URL/settings/actions/runners/new"
-  echo "  2. Under 'Configure', copy only the long code after  --token"
+  echo "  2. Under 'Configure', double-click the long code after  --token  to select all of it, and copy it"
   echo
-  read -r -s -p "Paste the code here (it won't show) and press Return: " TOKEN </dev/tty
-  echo
+  read -r -p "Paste the code here and press Return: " TOKEN </dev/tty
+  TOKEN=$(printf '%s' "$TOKEN" | tr -d '[:space:]')
   if [ -z "$TOKEN" ]; then say "No code pasted, so nothing was connected. Run the script again when you have it."; exit 1; fi
-  ./config.sh --url "$REPO_URL" --token "$TOKEN" --name "$NAME" --labels "$LABEL" \
-              --work _work --unattended --replace
+  if ! printf '%s' "$TOKEN" | grep -Eq '^[A-Z0-9]{29,}$'; then
+    say "That doesn't look like the whole code (it has ${#TOKEN} characters; GitHub's are at least 29 capital letters and numbers)."
+    echo "Reload the GitHub page for a fresh code, double-click it to select all of it, and run this script again."
+    exit 1
+  fi
+  if ! ./config.sh --url "$REPO_URL" --token "$TOKEN" --name "$NAME" --labels "$LABEL" \
+                   --work _work --unattended --replace; then
+    unset TOKEN
+    say "GitHub didn't accept that code. Codes only last an hour, so reload the GitHub page for a fresh one"
+    echo "and run this script again."
+    exit 1
+  fi
   unset TOKEN
 else
   echo "Already connected to GitHub as $(python3 -c 'import json; print(json.load(open(".runner", encoding="utf-8-sig")).get("agentName", "this Mac"))')."
