@@ -19,7 +19,10 @@ concurrency:
 
 jobs:
   post:
-    runs-on: ubuntu-latest
+    # Runs on Cameron's own machine (a self-hosted runner with the label "autopost": the Mac now, a Raspberry Pi
+    # later), so posts reach Instagram from his home connection rather than GitHub's shared servers. Set up with
+    # tools/setup-mac-runner.sh. If no such runner is online, the run waits; the next one replaces it.
+    runs-on: [self-hosted, autopost]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
@@ -44,5 +47,18 @@ jobs:
         if: always() && hashFiles('report.md') != ''
         env:
           GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
         run: |
-          gh issue create --title "Instagram – something to do by hand ($(TZ=Europe/London date +'%a %d %b %H:%M'))" --body-file report.md
+          python3 - <<'PY'
+          import json, os, urllib.request, datetime as dt
+          from zoneinfo import ZoneInfo
+          when = dt.datetime.now(ZoneInfo('Europe/London')).strftime('%a %d %b %H:%M')
+          issue = {'title': f'Instagram – something to do by hand ({when})',
+                   'body': open('report.md', encoding='utf-8').read()}
+          req = urllib.request.Request(f"https://api.github.com/repos/{os.environ['REPO']}/issues",
+                                       data=json.dumps(issue).encode(), method='POST',
+                                       headers={'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
+                                                'Accept': 'application/vnd.github+json'})
+          urllib.request.urlopen(req, timeout=30).read()
+          PY
+          rm -f report.md
