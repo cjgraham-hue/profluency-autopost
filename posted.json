@@ -144,5 +144,11 @@
   "media_id": "18465231619140405",
   "at": "2026-10-25T09:55:54.466232+00:00",
   "note": ""
+ },
+ "2026-10-25-1030-post": {
+  "status": "posted",
+  "media_id": "17992508421066131",
+  "at": "2026-10-25T10:54:43.623131+00:00",
+  "note": "posted, but the first comment failed (POST 17992508421066131/comments: 403 Permissions error); add the hashtags by hand"
  }
 }
