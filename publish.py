@@ -197,8 +197,8 @@ def main(argv):
             state[it['id']] = dict(status='posted', media_id=mid, at=now.isoformat(), note=note); save_state(state)
             print('Posted', it['id'], mid);
             if note and it.get('first_comment'):
-    report.append(f"- **{it['source']}** — first comment failed. Paste this under the post:\n\n```\n{it['first_comment']}\n```")
-elif note:
+            report.append(f"- **{it['source']}** — first comment failed. Paste this under the post:\n\n```\n{it['first_comment']}\n```")
+            elif note:
     report.append(f"- {it['source']}: {note}")
             if it.get('follow_up'): report.append(f"- **Posted** {at.strftime('%a %d %b %H:%M')} · {it['source']}. Follow-up, if you want it: {it['follow_up']}")
         except Exception as e:
