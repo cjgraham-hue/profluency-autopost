@@ -126,7 +126,7 @@ def publish(it):
     if it.get('first_comment'):
         human_pause(60, 180)          # a person adds the hashtags a minute or two later, not within a second
         try: call('POST', f'{media_id}/comments', message=it['first_comment'])
-        except RuntimeError as e: note = f'posted, but the first comment failed ({e}); add the hashtags by hand'
+        except RuntimeError as e: note = f'posted, but the first comment failed ({e}). Paste this under the post:\n\n```\n{it["first_comment"]}\n```'
     return media_id, note
 
 def now_london(arg=None):
