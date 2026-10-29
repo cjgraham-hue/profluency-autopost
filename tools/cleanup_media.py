@@ -7,10 +7,10 @@ Runs every Monday morning from .github/workflows/cleanup-media.yml. Run from the
   python3 tools/cleanup_media.py --now 2026-11-02T06:30 pretend it's another time (for testing)
 
 What goes: anything dated before this Monday 00:00 (UK time) that is finished with, i.e.
-  - a scheduled item's file and Reel cover, once posted.json records it as "posted" or "by hand";
+  - a scheduled item's file, carousel slides and Reel cover, once posted.json records it as "posted" or "by hand";
   - a file no item uses any more (e.g. the artwork a restyle replaced), going by the date in its name.
-What stays: everything from this week on; anything not yet posted; and a "missed" or failed item's file for
-four weeks, in case you want to post it by hand (python3 publish.py --only ID).
+What stays: everything from this week on; anything not yet posted; and a "missed", failed or on-hold item's file
+for four weeks, in case you want to post it by hand (python3 publish.py --only ID).
 The originals are all backed up in Drive (Social media backup), and git history keeps every removed file.
 """
 import json, os, re, sys, subprocess, datetime as dt
@@ -31,7 +31,7 @@ def main(args):
 
     used = {}                                             # file -> the items that use it
     for it in items:
-        for name in [it['media']] + ([it['cover']] if it.get('cover') else []):
+        for name in dict.fromkeys([it['media']] + it.get('slides', []) + ([it['cover']] if it.get('cover') else [])):
             used.setdefault(name, []).append(it)
 
     remove, kept = [], []
@@ -41,7 +41,7 @@ def main(args):
             ok = True
             for it in used[name]:
                 at = dt.datetime.fromisoformat(it['post_at'])
-                status = state.get(it['id'], {}).get('status')
+                status = state.get(it['id'], {}).get('status') or ('on hold' if it.get('hold') else None)
                 if at >= week_start: ok = False                                   # this week or later
                 elif status not in DONE:
                     ok = at < week_start - KEEP_UNPOSTED and ok                   # missed or failed: keep 4 weeks

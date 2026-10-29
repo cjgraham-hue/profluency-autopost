@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""ProFluency autopost: publishes the month's stories, feed posts and Reels to @profluencyuk at the planned times,
-then adds the first comment. Runs every 15 minutes (GitHub Actions, or cron on your computer); each run posts
-whatever is due and not yet posted. Python 3.9+, standard library only.
+"""ProFluency autopost: publishes the month's stories, carousels and Reels to @profluencyuk at the planned times.
+Runs every 15 minutes (GitHub Actions, or cron on your computer); each run posts whatever is due and not yet
+posted. Python 3.9+, standard library only.
 
 Settings (environment variables)
   IG_USER_ID        your Instagram account's ID (from the API setup)
@@ -19,17 +19,20 @@ Usage
 
 Schedule items can carry "follow_up": a note emailed to Cameron (as a GitHub issue) once the item has been posted,
 e.g. a sticker to add by downloading the story and posting it again. Items with "manual" are not posted at all;
-they are emailed at their time instead.
+they are emailed at their time instead. Items with "hold" are not posted or emailed: they stay in the schedule,
+with the reason, until the line is removed.
+
+A carousel ("type": "carousel") lists its 2 to 10 files in "slides", in order; "media" is the first slide.
+Hashtags go at the end of the caption. No first comment is posted (from 29 Oct 2026).
 
 Staying clear of Instagram's automation checks (added 21 Oct 2026, after the account was flagged):
   - each post goes out up to 12 minutes after its planned time, a different amount for each post, so the timing
     is never exactly on the clock;
-  - the hashtag first comment waits 1 to 3 minutes after the post instead of following it within seconds;
   - if Meta blocks access ("API access blocked", a restricted or checkpointed account, suspected spam or a dead
     token), the run stops at once, writes pause.json and emails once. Nothing is tried again until you've sorted it
     in the Instagram app and run the workflow with "check", which resumes posting when the account answers.
 """
-import json, os, sys, time, random, hashlib, urllib.request, urllib.parse, urllib.error, datetime as dt
+import json, os, sys, time, hashlib, urllib.request, urllib.parse, urllib.error, datetime as dt
 from zoneinfo import ZoneInfo
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -92,8 +95,9 @@ def offset(it):
     """0 to 12 minutes after the planned time, fixed for each post, so posts never land exactly on the clock."""
     return dt.timedelta(seconds=int(hashlib.sha256(it['id'].encode()).hexdigest(), 16) % 721)
 
-def human_pause(lo, hi):
-    if os.environ.get('NO_DELAYS') != '1': time.sleep(random.uniform(lo, hi))
+def files(it):
+    """every file an item posts: its media, a carousel's slides and a Reel's cover"""
+    return list(dict.fromkeys([it['media']] + it.get('slides', []) + ([it['cover']] if it.get('cover') else [])))
 
 def wait_ready(container, kind):
     """videos take a while to process; images are usually ready at once"""
@@ -114,6 +118,15 @@ def publish(it):
         if it.get('cover'): p['cover_url'] = media_url(it['cover'])
     elif kind == 'story_image': p = dict(media_type='STORIES', image_url=media_url(it['media']))
     elif kind == 'story_video': p = dict(media_type='STORIES', video_url=media_url(it['media']))
+    elif kind == 'carousel':
+        children = []
+        for name in it['slides']:
+            video = name.lower().endswith('.mp4')
+            child = call('POST', f'{ig}/media', is_carousel_item='true',
+                         **(dict(media_type='VIDEO', video_url=media_url(name)) if video else dict(image_url=media_url(name))))['id']
+            wait_ready(child, 'reel' if video else 'post')
+            children.append(child)
+        p = dict(media_type='CAROUSEL', children=','.join(children), caption=it['caption'])
     else: raise RuntimeError(f'unknown type {kind}')
     container = call('POST', f'{ig}/media', **p)['id']
     wait_ready(container, kind)
@@ -122,12 +135,7 @@ def publish(it):
         except ApiError as e:
             if attempt == 4 or not (e.subcode == 2207027 or 'not available' in (e.msg or '').lower() or 'not ready' in (e.msg or '').lower()): raise
             time.sleep(20)
-    note = ''
-    if it.get('first_comment'):
-        human_pause(60, 180)          # a person adds the hashtags a minute or two later, not within a second
-        try: call('POST', f'{media_id}/comments', message=it['first_comment'])
-        except RuntimeError as e: note = f'posted, but the first comment failed ({e}). Paste this under the post:\n\n```\n{it["first_comment"]}\n```'
-    return media_id, note
+    return media_id
 
 def now_london(arg=None):
     return dt.datetime.fromisoformat(arg).astimezone(LONDON) if arg else dt.datetime.now(LONDON)
@@ -139,7 +147,7 @@ def main(argv):
 
     if '--list' in args:
         for i in items:
-            s = state.get(i['id'], {}).get('status', 'by hand' if 'manual' in i else 'waiting')
+            s = state.get(i['id'], {}).get('status', 'on hold' if i.get('hold') else 'by hand' if 'manual' in i else 'waiting')
             print(f"{i['post_at'][:16].replace('T', ' ')}  {i['type']:<12} {s:<10} {i['id']}")
         return 0
 
@@ -156,8 +164,10 @@ def main(argv):
         print('Publishing allowance:', json.dumps(lim.get('data', lim)))
         bad = 0
         for i in items:
-            if i['id'] in state: continue      # already done: its file may have been removed by the weekly cleanup
-            for name in [i['media']] + ([i['cover']] if i.get('cover') else []):
+            if i['id'] in state or i.get('hold'): continue      # done (its file may have been removed by the weekly cleanup) or on hold
+            if i['type'] == 'carousel' and not 2 <= len(i.get('slides', [])) <= 10: bad += 1; print('A carousel needs 2 to 10 slides:', i['id'])
+            if i.get('first_comment'): print('First comments are no longer posted, so move these hashtags into the caption:', i['id'])
+            for name in files(i):
                 try:
                     with urllib.request.urlopen(urllib.request.Request(media_url(name), method='HEAD'), timeout=30) as r:
                         ct = r.headers.get('Content-Type', '')
@@ -169,16 +179,16 @@ def main(argv):
 
     if '--only' in args:
         it = by_id[args[args.index('--only') + 1]]
-        mid, note = publish(it)
-        state[it['id']] = dict(status='posted', media_id=mid, at=now_london().isoformat(), note=note); save_state(state)
-        print('Posted', it['id'], mid, note); return 0
+        mid = publish(it)
+        state[it['id']] = dict(status='posted', media_id=mid, at=now_london().isoformat()); save_state(state)
+        print('Posted', it['id'], mid); return 0
 
     dry = '--dry-run' in args or os.environ.get('DRY_RUN') == '1'
     now = now_london(args[args.index('--now') + 1] if '--now' in args else None)
     paused = load_pause()
     if paused: print(f"Posting is paused since {paused.get('since', '?')[:16]}: {paused.get('reason', '')}. Run the workflow with \"check\" to resume.")
     for it in items:
-        if it['id'] in state: continue
+        if it['id'] in state or it.get('hold'): continue
         at = dt.datetime.fromisoformat(it['post_at'])
         if at + offset(it) > now: continue
         late = now - at
@@ -193,13 +203,9 @@ def main(argv):
         if paused: continue            # waits; once resumed it posts if still within the window, otherwise it's reported as missed
         if dry: print('Would post', it['id'], it['type'], media_url(it['media']) if os.environ.get('MEDIA_BASE_URL') else it['media']); continue
         try:
-            mid, note = publish(it)
-            state[it['id']] = dict(status='posted', media_id=mid, at=now.isoformat(), note=note); save_state(state)
+            mid = publish(it)
+            state[it['id']] = dict(status='posted', media_id=mid, at=now.isoformat()); save_state(state)
             print('Posted', it['id'], mid);
-            if note and it.get('first_comment'):
-                report.append(f"- **{it['source']}** — first comment failed. Paste this under the post:\n\n```\n{it['first_comment']}\n```")
-            elif note:
-                report.append(f"- {it['source']}: {note}")
             if it.get('follow_up'): report.append(f"- **Posted** {at.strftime('%a %d %b %H:%M')} · {it['source']}. Follow-up, if you want it: {it['follow_up']}")
         except Exception as e:
             print('FAILED', it['id'], e)
