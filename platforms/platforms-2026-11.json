@@ -99,8 +99,8 @@
    "board": "Talking with your partner's family in Spanish",
    "alt": "An image of a linen tablecloth with a glass of water inside a doorway arch, beside four moments of the evening, above the words: ¿Primera cena en casa de los padres de tu pareja? First dinner at your partner’s parents’ house?",
    "ai_label": false,
-   "status": "to do",
-   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time. The board is new: create it first."
+   "status": "scheduled",
+   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time. Scheduled 29 Oct 2026 from cameron's Mac for Sat 31/10 at 10:30 UK, text checked against this file, AI label off."
   },
   {
    "id": "2026-11-01-1030-post",
@@ -183,8 +183,8 @@
    "board": "Spanish phrases",
    "alt": "An image of two shadows talking on a sunlit wall in an old street, in black and white, under the words: La vecina de enfrente te saluda cada mañana. The neighbour across the street says hello every morning.",
    "ai_label": false,
-   "status": "to do",
-   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time."
+   "status": "scheduled",
+   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time. Scheduled 29 Oct 2026 from cameron's Mac for Sat 7/11 at 10:30 UK, text checked against this file, AI label off."
   },
   {
    "id": "2026-11-07-1030-post",
@@ -267,8 +267,8 @@
    "board": "Spanish phrases",
    "alt": "An image of two people talking at a café table, seen through a rainy window, under the words: Tercer intercambio y se os han acabado los temas. Your third exchange, and you’ve run out of things to talk about.",
    "ai_label": false,
-   "status": "to do",
-   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time."
+   "status": "scheduled",
+   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time. Scheduled 29 Oct 2026 from cameron's Mac for Sat 14/11 at 10:30 UK, text checked against this file, AI label off."
   },
   {
    "id": "2026-11-15-1030-post",
@@ -309,8 +309,8 @@
    "board": "Talking with your partner's family in Spanish",
    "alt": "An image of a Dime Más conversation card on cream paper, under the words: Comida del domingo con los abuelos de tu pareja. Sunday lunch with your partner’s grandparents.",
    "ai_label": false,
-   "status": "to do",
-   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time. The board is new: create it first."
+   "status": "scheduled",
+   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time. Scheduled 29 Oct 2026 from cameron's Mac for Tue 17/11 at 19:30 UK, text checked against this file, AI label off."
   },
   {
    "id": "2026-11-18-1930-reel",
@@ -379,8 +379,8 @@
    "board": "Talking with your partner's family in Spanish",
    "alt": "An image of a cup on a linen cloth, under the words: Nochebuena con la familia de tu pareja. Christmas Eve with your partner’s family.",
    "ai_label": false,
-   "status": "to do",
-   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time. The board is new: create it first."
+   "status": "scheduled",
+   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time. Scheduled 29 Oct 2026 from cameron's Mac for Tue 24/11 at 19:30 UK, text checked against this file, AI label off."
   },
   {
    "id": "2026-11-25-1930-reel",
@@ -422,7 +422,7 @@
    "alt": "A drawing of a Christmas lottery share from the bar downstairs, number 07214, on dark paper, above the words: En el bar de abajo te preguntan si quieres lotería. At the bar downstairs, they ask if you’d like some lottery.",
    "ai_label": false,
    "status": "to do",
-   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time."
+   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time. Saved on Pinterest on 29 Oct as a filled-in draft (its calendar only reached 27 Nov that day, AI label off). Needs 28/11/2026 at 10:30 and Schedule, from 30 Oct."
   },
   {
    "id": "2026-11-28-1030-reel",
@@ -636,11 +636,13 @@
   }
  ],
  "updated": "2026-10-29",
- "boards_to_create": [
+ "boards_created": [
   {
    "name": "Talking with your partner's family in Spanish",
    "visibility": "public",
-   "description": "Questions and Spanish phrases for talking with your partner's family, from the first dinner with their parents to long Sunday lunches. Spanish first, with the English beside it."
+   "description": "Questions and Spanish phrases for talking with your partner's family, from the first dinner with their parents to long Sunday lunches. Spanish first, with the English beside it.",
+   "status": "created 29 Oct 2026",
+   "url": "https://uk.pinterest.com/ProFluency/talking-with-your-partners-family-in-spanish/"
   }
  ]
 }
