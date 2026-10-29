@@ -1,6 +1,6 @@
 {
  "month": "2026-11",
- "covers": "Instagram feed slots from Sat 24 Oct to Mon 30 Nov 2026",
+ "covers": "Instagram feed slots from Sat 24 Oct to Mon 30 Nov 2026, plus the 29 Oct gap-fill carousels",
  "image_base": "https://cjgraham-hue.github.io/profluency-autopost/",
  "video_base": "https://cjgraham-hue.github.io/profluency-autopost/media/",
  "pins": [
@@ -89,6 +89,20 @@
    "note": "Pinned in the 22 Oct run (scheduled on 24 Oct), with its own title and text. Left as is."
   },
   {
+   "id": "2026-10-31-1030-carousel",
+   "date": "2026-10-31",
+   "time": "10:30",
+   "image": "pins/2026-11/2026-10-31-1030-carousel-pin.jpg",
+   "title": "What to say at your first dinner with your partner’s parents, in Spanish",
+   "description": "Your first dinner at your partner’s parents’ house, from hello to goodbye. Al llegar: Gracias por invitarme. Tenéis una casa preciosa. (Thanks for having me. You have a lovely home.) En la mesa: ¿Quién te enseñó a hacer este plato? (Who taught you to make this dish?) Con el café: ¿Y vosotros cómo os conocisteis? (And how did you two meet?) If in doubt, start with usted.\n\nTalking with your partner’s family in another language: questions that help, in the ProFluency Journal at profluency.co.uk",
+   "link": "https://profluency.co.uk/journal/talking-with-your-partners-family/",
+   "board": "Talking with your partner's family in Spanish",
+   "alt": "An image of a linen tablecloth with a glass of water inside a doorway arch, beside four moments of the evening, above the words: ¿Primera cena en casa de los padres de tu pareja? First dinner at your partner’s parents’ house?",
+   "ai_label": false,
+   "status": "to do",
+   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time. The board is new: create it first."
+  },
+  {
    "id": "2026-11-01-1030-post",
    "date": "2026-11-01",
    "time": "10:30",
@@ -157,6 +171,20 @@
    "ai_label": false,
    "status": "scheduled",
    "note": "Scheduled 24 Oct 2026 with the text above."
+  },
+  {
+   "id": "2026-11-07-1030-carousel",
+   "date": "2026-11-07",
+   "time": "10:30",
+   "image": "pins/2026-11/2026-11-07-1030-carousel-pin.jpg",
+   "title": "¿Cuánto tiempo llevas viviendo en el barrio? A Spanish question for new neighbours in Spain",
+   "description": "Moved to Spain, and you only ever say buenos días to the neighbour across the street? Try one more question: ¿Cuánto tiempo llevas viviendo en el barrio? (How long have you lived round here?) Then ask where they’d send you: ¿Qué sitio del barrio me recomiendas? (Which place round here would you recommend?)\n\nThey liked you more than you think, in the ProFluency Journal at profluency.co.uk",
+   "link": "https://profluency.co.uk/journal/they-liked-you-more-than-you-think/",
+   "board": "Spanish phrases",
+   "alt": "An image of two shadows talking on a sunlit wall in an old street, in black and white, under the words: La vecina de enfrente te saluda cada mañana. The neighbour across the street says hello every morning.",
+   "ai_label": false,
+   "status": "to do",
+   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time."
   },
   {
    "id": "2026-11-07-1030-post",
@@ -229,6 +257,20 @@
    "note": "Pinned in the 22 Oct run (scheduled on 24 Oct), with its own title and text. Left as is."
   },
   {
+   "id": "2026-11-14-1030-carousel",
+   "date": "2026-11-14",
+   "time": "10:30",
+   "image": "pins/2026-11/2026-11-14-1030-carousel-pin.jpg",
+   "title": "¿Qué es algo que en tu país sabe todo el mundo y aquí nadie entiende? For language exchanges",
+   "description": "Third language exchange and you’ve run out of things to talk about? Try this Spanish conversation question: ¿Qué es algo que en tu país sabe todo el mundo y aquí nadie entiende? (What’s something everyone knows back home that nobody gets here?) It works in both languages. One of you asks, the other tells. Then swap.\n\nHow to run a language exchange that doesn’t fizzle out, in the ProFluency Journal at profluency.co.uk",
+   "link": "https://profluency.co.uk/journal/how-to-run-a-language-exchange/",
+   "board": "Spanish phrases",
+   "alt": "An image of two people talking at a café table, seen through a rainy window, under the words: Tercer intercambio y se os han acabado los temas. Your third exchange, and you’ve run out of things to talk about.",
+   "ai_label": false,
+   "status": "to do",
+   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time."
+  },
+  {
    "id": "2026-11-15-1030-post",
    "date": "2026-11-15",
    "time": "10:30",
@@ -255,6 +297,20 @@
    "ai_label": false,
    "status": "scheduled",
    "note": "Scheduled 24 Oct 2026 with the text above."
+  },
+  {
+   "id": "2026-11-17-1930-carousel",
+   "date": "2026-11-17",
+   "time": "19:30",
+   "image": "pins/2026-11/2026-11-17-1930-carousel-pin.jpg",
+   "title": "¿Qué cualidad en una pareja has aprendido a valorar más con los años? Ask the grandparents",
+   "description": "Sunday lunch with your partner’s grandparents, together for a lifetime. Ask them this Dime Más card question: ¿Qué cualidad en una pareja has aprendido a valorar más con los años? (What quality in a partner have you learned to value more over the years?) Ask them one at a time, and you’ll hear two versions of the same life together.\n\nThe third culture: how intercultural couples build a language of their own, in the ProFluency Journal at profluency.co.uk",
+   "link": "https://profluency.co.uk/journal/intercultural-couples-coping-with-cultural-difference/",
+   "board": "Talking with your partner's family in Spanish",
+   "alt": "An image of a Dime Más conversation card on cream paper, under the words: Comida del domingo con los abuelos de tu pareja. Sunday lunch with your partner’s grandparents.",
+   "ai_label": false,
+   "status": "to do",
+   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time. The board is new: create it first."
   },
   {
    "id": "2026-11-18-1930-reel",
@@ -313,6 +369,20 @@
    "note": "Saved as a filled-in draft on Pinterest on 24 Oct (its calendar only reached 22 Nov). Needs the date, 19:30 and Schedule."
   },
   {
+   "id": "2026-11-24-1930-carousel",
+   "date": "2026-11-24",
+   "time": "19:30",
+   "image": "pins/2026-11/2026-11-24-1930-carousel-pin.jpg",
+   "title": "Nochebuena with your partner’s family: Spanish conversation cards for the sobremesa",
+   "description": "Christmas Eve with your partner’s family in Spain ends in a sobremesa, the long talk at the table after the meal. Dime Más Intermediate (B1–B2) is 60 cards of real conversation questions in Spanish, with English on every card, so you can follow along and ask your own.\n\nDime Más Cards, Intermediate (B1–B2): £23.99 at profluency.co.uk, also on Amazon UK",
+   "link": "https://profluency.co.uk/shop/dime-mas-cards-intermediate/",
+   "board": "Talking with your partner's family in Spanish",
+   "alt": "An image of a cup on a linen cloth, under the words: Nochebuena con la familia de tu pareja. Christmas Eve with your partner’s family.",
+   "ai_label": false,
+   "status": "to do",
+   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time. The board is new: create it first."
+  },
+  {
    "id": "2026-11-25-1930-reel",
    "date": "2026-11-25",
    "time": "19:30",
@@ -339,6 +409,20 @@
    "ai_label": false,
    "status": "to do",
    "note": "More than 30 days ahead on 24 Oct."
+  },
+  {
+   "id": "2026-11-28-1030-carousel",
+   "date": "2026-11-28",
+   "time": "10:30",
+   "image": "pins/2026-11/2026-11-28-1030-carousel-pin.jpg",
+   "title": "Si nos tocara el Gordo, ¿qué sería lo primero que harías? Christmas in Spain",
+   "description": "Christmas in Spain: at your local bar, they ask if you’d like some lottery. Many bars play their own number in the Lotería de Navidad and sell shares in it. Say yes, and you’ve got a question for all of December: Si nos tocara el Gordo, ¿qué sería lo primero que harías? (If we won El Gordo, what’s the first thing you’d do?)\n\nWhy speaking another language feels so scary, and what helps, in the ProFluency Journal at profluency.co.uk",
+   "link": "https://profluency.co.uk/journal/why-speaking-another-language-feels-scary/",
+   "board": "Spanish phrases",
+   "alt": "A drawing of a Christmas lottery share from the bar downstairs, number 07214, on dark paper, above the words: En el bar de abajo te preguntan si quieres lotería. At the bar downstairs, they ask if you’d like some lottery.",
+   "ai_label": false,
+   "status": "to do",
+   "note": "Gap fill, 29 Oct 2026: the cover of the carousel at the same time."
   },
   {
    "id": "2026-11-28-1030-reel",
@@ -551,5 +635,12 @@
    "note": "Scheduled in YouTube Studio in the 22 Oct run; its title and description differ slightly from the text above and were left as is. Checked 24 Oct: right date and UK time. AI use set to No in YouTube Studio on 24 Oct (cameron)."
   }
  ],
- "updated": "2026-10-24"
+ "updated": "2026-10-29",
+ "boards_to_create": [
+  {
+   "name": "Talking with your partner's family in Spanish",
+   "visibility": "public",
+   "description": "Questions and Spanish phrases for talking with your partner's family, from the first dinner with their parents to long Sunday lunches. Spanish first, with the English beside it."
+  }
+ ]
 }
