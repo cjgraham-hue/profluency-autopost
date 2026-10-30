@@ -20,7 +20,7 @@ same value as in the website repository), GITHUB_TOKEN and REPO (from the workfl
 FB_PAGE_TOKEN, optional GRAPH_VERSION.
 Python 3.9+, standard library only.
 """
-import json, os, random, sys, time, urllib.error, urllib.parse, urllib.request, datetime as dt
+import json, os, random, re, sys, time, urllib.error, urllib.parse, urllib.request, datetime as dt
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VERSION = os.environ.get('GRAPH_VERSION', 'v23.0')
@@ -28,6 +28,9 @@ IG = os.environ.get('IG_API_BASE', 'https://graph.instagram.com').rstrip('/') + 
 FB = os.environ.get('FB_API_BASE', 'https://graph.facebook.com').rstrip('/') + f'/{VERSION}'
 GITHUB_API = os.environ.get('GITHUB_API_BASE', 'https://api.github.com').rstrip('/')   # the three *_BASE settings are for testing only
 MAX_REPLIES = 6            # per run; the rest wait for the next run
+# The hub may only merge plan and media changes here: this repo's code runs on Cameron's own machine,
+# so anything touching publish.py, tools/ or workflows has to be reviewed and merged on GitHub.
+SAFE_FILES = re.compile(r'^(schedule\.json|posted\.json|token-status\.json|platforms/[^/]+\.json|docs/.+|[^/]+\.md)$')
 COMMENT_DAYS = 60          # comments on posts from the last 60 days
 INSIGHT_POSTS = 20         # posts whose reach and saves are refreshed each run
 
@@ -158,10 +161,12 @@ def apply_decisions(state):
                     github(f'/repos/{repo}/issues/{number}/comments', 'POST', {'body': 'Declined in the hub: ' + item['note'][:500]})
                 github(f'/repos/{repo}/pulls/{number}', 'PATCH', {'state': 'closed'})
                 result = {'applied': True, 'result': 'Declined and closed. The branch is kept, so it can be reopened on GitHub.'}
+            elif ((pr.get('head') or {}).get('repo') or {}).get('full_name') != repo:
+                result = {'failed': True, 'result': 'It comes from outside (a fork), so review and merge it on GitHub.'}
             else:
                 files = github(f'/repos/{repo}/pulls/{number}/files?per_page=100')
-                if any(f.get('filename', '').startswith('.github/workflows/') for f in files):
-                    result = {'failed': True, 'result': 'This one changes a GitHub workflow, which the hub is not allowed to merge. Merge it on GitHub.'}
+                if any(not SAFE_FILES.match(f.get('filename', '')) for f in files):
+                    result = {'failed': True, 'result': 'It changes the autopost code or a workflow, so review and merge it on GitHub.'}
                 elif pr.get('draft'):
                     result = {'failed': True, 'result': 'It is still a draft. Mark it ready on GitHub first.'}
                 else:
