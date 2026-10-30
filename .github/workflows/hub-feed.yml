@@ -1,13 +1,12 @@
 name: Hub feed
 
-# Links this repository to Cameron's private hub: posts the comment replies he pressed
-# "Send" on, merges the pull requests he approved there, and sends the hub Instagram's numbers and the comments
-# still waiting for a reply. See tools/hub_feed.py. The hub starts a run straight after a click (if the website
-# repository has HUB_DISPATCH_TOKEN), and this timer catches up every two hours during the day.
+# Links this repository to Cameron's private hub: posts the comment replies he pressed "Send" on, merges the
+# pull requests he approved there (schedule, media and notes only), and about every two hours sends the hub
+# Instagram's numbers and the comments still waiting for a reply. See tools/hub_feed.py.
 
 on:
   schedule:
-    - cron: '41 6-20/2 * * *'     # 06:41, 08:41 … 20:41 UTC
+    - cron: '7,22,37,52 6-21 * * *'     # every 15 minutes, 06:07 to 21:52 UTC
   workflow_dispatch:
 
 permissions:
@@ -29,15 +28,16 @@ jobs:
         env:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
-          HUB_SYNC_TOKEN: ${{ secrets.HUB_SYNC_TOKEN }}
+          HUB_FEED_TOKEN: ${{ secrets.HUB_FEED_TOKEN }}
           HUB_URL: ${{ secrets.HUB_URL }}
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
           FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
           GITHUB_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
+          HUB_FEED_FULL: ${{ github.event_name == 'workflow_dispatch' && '1' || '' }}
         run: |
-          if [ -z "$HUB_SYNC_TOKEN" ] || [ -z "$HUB_URL" ]; then
-            echo "The hub isn't set up here yet: add the secrets HUB_SYNC_TOKEN and HUB_URL (see tools/hub_feed.py)."
+          if [ -z "$HUB_FEED_TOKEN" ] || [ -z "$HUB_URL" ]; then
+            echo "The hub isn't set up here yet: add the secrets HUB_FEED_TOKEN and HUB_URL (see tools/hub_feed.py)."
             exit 0
           fi
           python3 tools/hub_feed.py

@@ -32,8 +32,9 @@ jobs:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL }}
           REPORT_FILE: report.md
+          # Passed as a variable, never pasted into the script, so no input can run commands on the Mac.
+          MODE: ${{ github.event.inputs.mode }}
         run: |
-          MODE="${{ github.event.inputs.mode }}"
           if [ "$MODE" = "check" ]; then python3 publish.py --check
           elif [ "$MODE" = "dry-run" ]; then python3 publish.py --dry-run
           else python3 publish.py; fi

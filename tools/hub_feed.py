@@ -2,22 +2,24 @@
 """Hub feed: links this repository to Cameron's private ProFluency hub.
 
 Runs on the same self-hosted runner as the autopost (Cameron's own machine), so Meta sees the same home address
-for everything the account does. Every two hours, and straight after a click in the hub, it:
+for everything the account does. Every 15 minutes in the day it asks the hub what Cameron has clicked, and:
 
   1. posts the replies to Instagram comments that Cameron pressed "Send" on in the hub (nothing is ever sent
      without that click), a few seconds apart, as replies from @profluencyuk to comments on its own posts;
   2. merges (or closes) this repository's pull requests that Cameron approved (or declined) in the hub;
-  3. sends the hub the account's numbers, recent posts with their likes and comments (plus reach, saves and
-     shares if the token has the insights permission), the stories live right now, and the comments that are
-     still waiting for a reply; and, if FB_PAGE_ID and FB_PAGE_TOKEN are set, the Facebook Page's numbers.
+  3. about every two hours (or straight after sending replies), sends the hub the account's numbers, recent posts
+     with their likes and comments (plus reach, saves and shares if the token has the insights permission), the
+     stories live right now, and the comments still waiting for a reply; and, if FB_PAGE_ID and FB_PAGE_TOKEN are
+     set, the Facebook Page's numbers.
 
 It never posts anything else, never touches the schedule, and stops at once if posting is paused (pause.json).
 Because this repository is public, its logs show counts only: no comment text, no usernames, no numbers.
 
-Settings (environment variables): IG_USER_ID, IG_ACCESS_TOKEN (as for publish.py), HUB_URL and HUB_SYNC_TOKEN
-(both repository secrets, so the hub's address never shows in this public repository's logs; HUB_SYNC_TOKEN is the
-same value as in the website repository), GITHUB_TOKEN and REPO (from the workflow), optional FB_PAGE_ID and
-FB_PAGE_TOKEN, optional GRAPH_VERSION.
+Settings (environment variables): IG_USER_ID, IG_ACCESS_TOKEN (as for publish.py), HUB_URL and HUB_FEED_TOKEN
+(both repository secrets, so the hub's address never shows in this public repository's logs; HUB_FEED_TOKEN is the
+same value as in the website repository, and it only lets the feed read clicks and send numbers back, not read the
+hub's other data), GITHUB_TOKEN and REPO (from the workflow), optional FB_PAGE_ID and FB_PAGE_TOKEN, optional
+GRAPH_VERSION, and HUB_FEED_FULL=1 to read Instagram whatever the time.
 Python 3.9+, standard library only.
 """
 import json, os, random, re, sys, time, urllib.error, urllib.parse, urllib.request, datetime as dt
@@ -28,6 +30,7 @@ IG = os.environ.get('IG_API_BASE', 'https://graph.instagram.com').rstrip('/') + 
 FB = os.environ.get('FB_API_BASE', 'https://graph.facebook.com').rstrip('/') + f'/{VERSION}'
 GITHUB_API = os.environ.get('GITHUB_API_BASE', 'https://api.github.com').rstrip('/')   # the three *_BASE settings are for testing only
 MAX_REPLIES = 6            # per run; the rest wait for the next run
+READ_EVERY = dt.timedelta(minutes=110)   # a full Instagram read at most this often, unless replies were just sent
 # The hub may only merge plan and media changes here: this repo's code runs on Cameron's own machine,
 # so anything touching publish.py, tools/ or workflows has to be reviewed and merged on GitHub.
 SAFE_FILES = re.compile(r'^(schedule\.json|posted\.json|token-status\.json|platforms/[^/]+\.json|docs/.+|[^/]+\.md)$')
@@ -80,7 +83,7 @@ def ig(path, method='GET', **params):
 
 
 def hub(path, body=None):
-    headers = {'X-Hub-Sync': setting('HUB_SYNC_TOKEN'), 'Accept': 'application/json', 'User-Agent': 'profluency-hub-feed'}
+    headers = {'X-Hub-Sync': setting('HUB_FEED_TOKEN'), 'Accept': 'application/json', 'User-Agent': 'profluency-hub-feed'}
     if body is not None:
         headers['Content-Type'] = 'application/json'
     url = setting('HUB_URL').rstrip('/') + path
@@ -141,6 +144,17 @@ def send_replies(state, paused):
 
 # ------------------------------------------------------------------------------------- pull requests approved in the hub
 
+def pr_files(repo, number):
+    """Every file a pull request changes (GitHub lists 100 a page, up to 3,000)."""
+    names = []
+    for page in range(1, 31):
+        batch = github(f'/repos/{repo}/pulls/{number}/files?per_page=100&page={page}')
+        names += [f.get('filename', '') for f in batch]
+        if len(batch) < 100:
+            break
+    return names
+
+
 def apply_decisions(state):
     acks = {}
     repo = setting('REPO')
@@ -164,8 +178,10 @@ def apply_decisions(state):
             elif ((pr.get('head') or {}).get('repo') or {}).get('full_name') != repo:
                 result = {'failed': True, 'result': 'It comes from outside (a fork), so review and merge it on GitHub.'}
             else:
-                files = github(f'/repos/{repo}/pulls/{number}/files?per_page=100')
-                if any(not SAFE_FILES.match(f.get('filename', '')) for f in files):
+                files = pr_files(repo, number)
+                if len(files) < int(pr.get('changed_files') or 0):
+                    result = {'failed': True, 'result': "GitHub didn't list all of its files, so review and merge it on GitHub."}
+                elif any(not SAFE_FILES.match(name) for name in files):
                     result = {'failed': True, 'result': 'It changes the autopost code or a workflow, so review and merge it on GitHub.'}
                 elif pr.get('draft'):
                     result = {'failed': True, 'result': 'It is still a draft. Mark it ready on GitHub first.'}
@@ -288,6 +304,19 @@ def facebook():
     return out
 
 
+def read_due(previous, acks):
+    """A full Instagram read about every two hours, after sending replies, or when asked."""
+    if os.environ.get('HUB_FEED_FULL') == '1' or any(a.get('applied') for a in acks.values()):
+        return True
+    try:
+        last = dt.datetime.fromisoformat(str(previous.get('generated_at')))
+    except ValueError:
+        return True
+    if last.tzinfo is None:
+        last = last.replace(tzinfo=dt.timezone.utc)
+    return dt.datetime.now(dt.timezone.utc) - last >= READ_EVERY
+
+
 def main():
     paused = os.path.exists(os.path.join(HERE, 'pause.json'))
     try:
@@ -295,7 +324,7 @@ def main():
     except ApiError as e:
         if e.status in (401, 404):
             # The hub isn't deployed yet, or doesn't know this token yet: nothing to do, and no failure email.
-            print('hub feed: the hub is not ready for this token yet (deploy the site after adding HUB_SYNC_TOKEN)')
+            print('hub feed: the hub is not ready for this token yet (deploy the site after adding HUB_FEED_TOKEN)')
             return
         raise
     state = export.get('state') or {}
@@ -304,22 +333,26 @@ def main():
     acks = {'replies': send_replies(state, paused), 'decisions': apply_decisions(state)}
 
     parts = {}
-    if paused:
-        parts['instagram'] = {**previous, 'ok': False, 'note': 'Posting is paused (pause.json), so the hub feed is leaving Instagram alone until it is cleared.'}
-        print('hub feed: posting is paused, so Instagram was not read')
-    else:
-        try:
-            parts['instagram'] = instagram(previous)
-            p = parts['instagram']
-            print(f"hub feed: Instagram read: {len(p['media'])} posts, {len(p['stories'])} stories, {len(p['comments'])} comments waiting, insights {'on' if p['insights_ok'] else 'off'}")
-        except ApiError as e:
-            parts['instagram'] = {**previous, 'ok': False, 'note': f'Instagram said no ({e.msg[:120]}).'}
-            print('hub feed: Instagram could not be read' + (' (Meta may be limiting the account)' if is_block(e) else ''))
-    fb = facebook()
-    if fb is not None:
-        parts['facebook'] = fb
-        print(f"hub feed: Facebook {'read' if fb.get('ok') else 'not read'}")
+    if read_due(previous, acks['replies']):
+        if paused:
+            parts['instagram'] = {**previous, 'ok': False, 'note': 'Posting is paused (pause.json), so the hub feed is leaving Instagram alone until it is cleared.'}
+            print('hub feed: posting is paused, so Instagram was not read')
+        else:
+            try:
+                parts['instagram'] = instagram(previous)
+                p = parts['instagram']
+                print(f"hub feed: Instagram read: {len(p['media'])} posts, {len(p['stories'])} stories, {len(p['comments'])} comments waiting, insights {'on' if p['insights_ok'] else 'off'}")
+            except ApiError as e:
+                parts['instagram'] = {**previous, 'ok': False, 'note': f'Instagram said no ({e.msg[:120]}).'}
+                print('hub feed: Instagram could not be read' + (' (Meta may be limiting the account)' if is_block(e) else ''))
+        fb = facebook()
+        if fb is not None:
+            parts['facebook'] = fb
+            print(f"hub feed: Facebook {'read' if fb.get('ok') else 'not read'}")
 
+    if not parts and not acks['replies'] and not acks['decisions']:
+        print('hub feed: nothing to do')
+        return
     hub('/api/sync/import', {'parts': parts, 'acks': acks})
     print('hub feed: sent to the hub')
 
