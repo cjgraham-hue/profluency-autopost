@@ -5,8 +5,13 @@ name: Hub feed
 # Instagram's numbers and the comments still waiting for a reply. See tools/hub_feed.py.
 
 on:
+  # Straight after every Instagram autopost run. The Mac's timer (tools/setup-mac-timer.sh) starts that every
+  # 15 minutes, 07:02 to 21:47, so replies Cameron presses Send on go out within about a quarter of an hour.
+  workflow_run:
+    workflows: ['Instagram autopost']
+    types: [completed]
   schedule:
-    - cron: '7,22,37,52 6-21 * * *'     # every 15 minutes, 06:07 to 21:52 UTC
+    - cron: '7,22,37,52 6-21 * * *'     # GitHub's own timer, best effort: a backup, as it often runs only 3 or 4 times a day
   workflow_dispatch:
 
 permissions:
