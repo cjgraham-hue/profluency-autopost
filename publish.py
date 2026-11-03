@@ -215,7 +215,7 @@ def main(argv):
                 report.append(f"- **Posting paused.** Instagram refused {it['source']} ({e}). Meta has blocked this app's access to the account, "
                               "so nothing more will be tried (retrying only looks more like a bot). Open the Instagram app and clear any notice "
                               "(\"confirm it's you\", Settings › Account Status). Then run Actions › Instagram autopost › Run workflow with \"check\": "
-                              "if the account answers, posting resumes on the next run. Anything more than 3 hours late by then is reported as missed.")
+                              f"if the account answers, posting resumes on the next run. Anything more than {WINDOW.total_seconds() / 3600:g} hours late by then is reported as missed.")
                 break
             report.append(f"- **Failed** {it['source']} ({e}). It will be tried again on the next run until {(at + WINDOW).strftime('%H:%M')}.")
     if not dry: save_state(state)
