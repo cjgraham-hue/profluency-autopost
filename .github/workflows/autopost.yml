@@ -3,6 +3,8 @@ name: Instagram autopost
 on:
   schedule:
     - cron: '*/15 6-20 * * *'     # every 15 minutes, 06:00–20:59 UTC (covers 07:00–21:59 in BST and GMT)
+                                  # GitHub runs this late or not at all at busy times; the Mac's own timer
+                                  # (tools/setup-mac-timer.sh) starts the job on time, and this stays as a backup
   workflow_dispatch:
     inputs:
       mode:
@@ -31,6 +33,7 @@ jobs:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL }}
+          WINDOW_HOURS: '12'   # GitHub's timer can skip hours at a time: a late post still goes out rather than being skipped
           REPORT_FILE: report.md
           # Passed as a variable, never pasted into the script, so no input can run commands on the Mac.
           MODE: ${{ github.event.inputs.mode }}
