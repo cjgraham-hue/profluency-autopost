@@ -64,16 +64,30 @@ cat > "$DIR/start-posting.sh" <<SH
 #!/bin/bash
 # Started by the ProFluency posting timer. Asks GitHub to run the Instagram autopost workflow (mode "post"),
 # unless a run is already waiting or running. The workflow only posts what is due, so an extra start is harmless.
+# At 02 past every other hour (07:02, 09:02 … 21:02) it also starts the hub sync in the website repository,
+# because GitHub's own two-hourly timer for it often skips runs.
 REPO="$REPO"
+SITE="cjgraham-hue/profluency"
 GH="$GH"
 stamp() { date '+%Y-%m-%d %H:%M'; }
 busy=\$("\$GH" run list -R "\$REPO" -w autopost.yml -L 5 --json status --jq '[.[] | select(.status != "completed")] | length' 2>&1) \\
   || { echo "\$(stamp) couldn't reach GitHub: \$busy"; exit 0; }
-if [ "\$busy" != "0" ]; then echo "\$(stamp) a posting run is already waiting or running"; exit 0; fi
-if out=\$("\$GH" workflow run autopost.yml -R "\$REPO" -f mode=post 2>&1); then
+if [ "\$busy" != "0" ]; then echo "\$(stamp) a posting run is already waiting or running"
+elif out=\$("\$GH" workflow run autopost.yml -R "\$REPO" -f mode=post 2>&1); then
   echo "\$(stamp) started the posting job"
 else
   echo "\$(stamp) couldn't start the posting job: \$out"
+fi
+hour=\$((10#\$(date +%H))); minute=\$((10#\$(date +%M)))
+if [ \$((hour % 2)) -eq 1 ] && [ "\$minute" -lt 15 ]; then
+  syncing=\$("\$GH" run list -R "\$SITE" -w hub-sync.yml -L 5 --json status --jq '[.[] | select(.status != "completed")] | length' 2>/dev/null || echo 1)
+  if [ "\$syncing" = "0" ] && out=\$("\$GH" workflow run hub-sync.yml -R "\$SITE" 2>&1); then
+    echo "\$(stamp) started the hub sync"
+  elif [ "\$syncing" != "0" ]; then
+    echo "\$(stamp) a hub sync is already waiting or running"
+  else
+    echo "\$(stamp) couldn't start the hub sync: \$out"
+  fi
 fi
 # keep the log short
 if [ -f "$LOG" ] && [ "\$(wc -l < "$LOG")" -gt 3000 ]; then tail -n 1500 "$LOG" > "$LOG.tmp" && mv "$LOG.tmp" "$LOG"; fi
@@ -105,7 +119,8 @@ launchctl bootout "gui/$(id -u)/$LABEL" >/dev/null 2>&1 || true
 launchctl bootstrap "gui/$(id -u)" "$PLIST" 2>/dev/null || launchctl load -w "$PLIST"
 
 say "Done. The timer is on."
-echo "It asks GitHub to start the posting job at 02, 17, 32 and 47 minutes past each hour, 07:02 to 21:47."
+echo "It asks GitHub to start the posting job at 02, 17, 32 and 47 minutes past each hour, 07:02 to 21:47,"
+echo "and the hub sync at 07:02, 09:02 and every two hours after, to 21:02."
 echo "Each start is logged in $LOG. After the next quarter hour you should see a line like"
 echo "'started the posting job' there, and a new run under Actions › Instagram autopost on GitHub."
 echo "Keep the Mac on, plugged in and awake from 7am to 10pm, as before."
