@@ -6,7 +6,7 @@
 #
 # What it does, asking before anything that changes the Mac:
 #   1. power: never sleeps on mains power, wakes for the network, starts up again after a power cut
-#   2. tools: Apple's command line tools, Homebrew and GitHub's command line tool (gh)
+#   2. tools: Apple's command line tools, Python and GitHub's command line tool (gh), with Homebrew if the Mac has it
 #   3. GitHub sign-in for gh (you do it in the browser; no password or token is typed here or saved by this script)
 #   4. the posting runner "cameron-mac" (label autopost), which takes over from the old Mac's
 #   5. the timer that starts posting every 15 minutes and the hub sync every two hours (tools/setup-mac-timer.sh)
@@ -58,36 +58,43 @@ if ! xcode-select -p >/dev/null 2>&1; then
   exit 1
 fi
 find_gh() { GH=$(command -v gh || true); for p in /opt/homebrew/bin/gh /usr/local/bin/gh; do [ -z "$GH" ] && [ -x "$p" ] && GH="$p"; done; }
+# Without Homebrew (it no longer supports Intel Macs): GitHub's own build of gh, copied to /usr/local/bin.
+install_gh_direct() {
+  local arch url tmp
+  case "$(uname -m)" in arm64) arch=arm64 ;; *) arch=amd64 ;; esac
+  url=$(curl -fsSL https://api.github.com/repos/cli/cli/releases/latest | grep -o "https://[^\"]*_macOS_${arch}\.zip" | head -n 1)
+  [ -n "$url" ] || return 1
+  tmp=$(mktemp -d) && curl -fsSL -o "$tmp/gh.zip" "$url" && unzip -q "$tmp/gh.zip" -d "$tmp" || return 1
+  echo "Copying gh to /usr/local/bin (macOS may ask for this Mac's password)."
+  sudo mkdir -p /usr/local/bin && sudo cp "$tmp"/gh_*/bin/gh /usr/local/bin/gh && sudo chmod 755 /usr/local/bin/gh
+  rm -rf "$tmp"
+}
+# Without Homebrew: python.org's Python 3.12 (works on Intel and Apple silicon), with its certificates.
+install_python_direct() {
+  local v=3.12.8 pkg
+  pkg="$HUB_DIR/python-$v.pkg"
+  echo "Installing Python $v from python.org (macOS may ask for this Mac's password)..."
+  curl -fsSL -o "$pkg" "https://www.python.org/ftp/python/$v/python-$v-macos11.pkg" && sudo installer -pkg "$pkg" -target / >/dev/null || return 1
+  rm -f "$pkg"
+  [ -f "/Applications/Python 3.12/Install Certificates.command" ] && bash "/Applications/Python 3.12/Install Certificates.command" >/dev/null 2>&1
+  PATH="/Library/Frameworks/Python.framework/Versions/3.12/bin:$PATH"; export PATH; hash -r
+}
+BREW=$(command -v brew || true); for p in /opt/homebrew/bin/brew /usr/local/bin/brew; do [ -z "$BREW" ] && [ -x "$p" ] && BREW="$p"; done
 find_gh
 if [ -z "$GH" ]; then
-  BREW=$(command -v brew || true); for p in /opt/homebrew/bin/brew /usr/local/bin/brew; do [ -z "$BREW" ] && [ -x "$p" ] && BREW="$p"; done
-  if [ -z "$BREW" ]; then
-    echo "GitHub's command line tool (gh) comes from Homebrew, which isn't installed yet."
-    if ask "Install Homebrew now (it asks for this Mac's password)?"; then
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" </dev/tty
-      for p in /opt/homebrew/bin/brew /usr/local/bin/brew; do [ -z "$BREW" ] && [ -x "$p" ] && BREW="$p"; done
-    fi
-  fi
-  if [ -z "$BREW" ]; then echo "Without Homebrew, install gh from https://cli.github.com, then run this script again."; exit 1; fi
-  "$BREW" install gh
+  if [ -n "$BREW" ]; then "$BREW" install gh; else install_gh_direct; fi
   find_gh
 fi
-[ -n "$GH" ] || { echo "gh didn't install. Install it from https://cli.github.com and run this script again."; exit 1; }
-# Homebrew's folder goes first on the path, so the runner (which keeps the path it's set up with) finds its tools.
-for d in /opt/homebrew/bin /usr/local/bin; do [ -d "$d" ] && case ":$PATH:" in *":$d:"*) ;; *) PATH="$d:$PATH" ;; esac; done
+[ -n "$GH" ] || { echo "gh didn't install. Send this message to Claude."; exit 1; }
+# The runner keeps the path it's set up with, so put the tools' folders first.
+for d in /usr/local/bin /opt/homebrew/bin; do [ -d "$d" ] && case ":$PATH:" in *":$d:"*) ;; *) PATH="$d:$PATH" ;; esac; done
 export PATH
 py_ok() { python3 -c 'import sys, zoneinfo, ssl; sys.exit(0 if sys.version_info >= (3, 9) else 1)' >/dev/null 2>&1; }
 if ! py_ok; then
-  echo "Python 3.9 or later isn't ready (this Mac has: $(python3 --version 2>&1 | head -n 1)). Installing it with Homebrew..."
-  BREW=$(command -v brew || true); for p in /opt/homebrew/bin/brew /usr/local/bin/brew; do [ -z "$BREW" ] && [ -x "$p" ] && BREW="$p"; done
-  if [ -z "$BREW" ] && ask "Python comes from Homebrew, which isn't installed yet. Install Homebrew now (it asks for this Mac's password)?"; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" </dev/tty
-    for p in /opt/homebrew/bin/brew /usr/local/bin/brew; do [ -z "$BREW" ] && [ -x "$p" ] && BREW="$p"; done
-    for d in /opt/homebrew/bin /usr/local/bin; do [ -d "$d" ] && PATH="$d:$PATH"; done; export PATH
-  fi
-  [ -n "$BREW" ] && "$BREW" install python
+  echo "Python 3.9 or later isn't ready on this Mac ($(python3 --version 2>&1 | head -n 1))."
+  if [ -n "$BREW" ]; then "$BREW" install python; else install_python_direct; fi
   hash -r
-  py_ok || { echo "Python still isn't ready ($(command -v python3 || echo none found)). Send this message to Claude."; exit 1; }
+  py_ok || { echo "Python still isn't ready. Send Claude this: $(uname -m) $(sw_vers -productVersion) $(xcode-select -p 2>&1) $(command -v python3) $(python3 --version 2>&1 | head -n 1)"; exit 1; }
 fi
 echo "Python ready: $(python3 --version 2>&1)."
 if ! python3 -c 'import urllib.request, urllib.error
@@ -174,7 +181,7 @@ cat > "$STATUS" <<'SH'
 #!/bin/bash
 # ProFluency hub Mac status: what's running, with no Claude needed. Double-click "ProFluency status" on the Desktop.
 REPO="cjgraham-hue/profluency-autopost"; SITE="cjgraham-hue/profluency"
-GH=$(command -v gh || true); for p in /opt/homebrew/bin/gh /usr/local/bin/gh; do [ -z "$GH" ] && [ -x "$p" ] && GH="$p"; done
+GH=$(command -v gh || true); for p in /usr/local/bin/gh /opt/homebrew/bin/gh; do [ -z "$GH" ] && [ -x "$p" ] && GH="$p"; done
 ok() { printf '  \033[32m✓\033[0m %s\n' "$*"; }; no() { printf '  \033[31m✗\033[0m %s\n' "$*"; }
 echo; echo "ProFluency hub Mac · $(date '+%a %d %b %H:%M')"; echo
 if (cd "$HOME/profluency-runner" 2>/dev/null && ./svc.sh status 2>/dev/null | grep -qi started); then ok "Posting runner is running"; else no "Posting runner isn't running: run the setup command again"; fi
