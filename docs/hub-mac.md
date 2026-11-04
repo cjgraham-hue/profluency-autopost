@@ -36,4 +36,4 @@ Finish with no more than four short lines: what works, and only the things Camer
 On GitHub, by itself: the hub sync (also started by this Mac's timer and by the hub when Cameron approves
 something), the Journal workflows, and the Monday letter draft each Tuesday. On this Mac, with no Claude: posting
 to Instagram, sending replies, merging approved Instagram changes, and the status check. On this Mac,
-with Claude: the weekly Chrome task for YouTube Shorts and Pinterest pins, and anything Cameron asks for.
+with Claude: the Chrome task for YouTube Shorts and Pinterest pins (the 1st and 15th of each month), and anything Cameron asks for.
