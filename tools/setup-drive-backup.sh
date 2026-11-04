@@ -93,8 +93,18 @@ put() { # put SOURCE FOLDER: copy if missing or a different size (sizes only, so
   if [ -f "$dir/$name" ] && [ "$(stat -f %z "$src")" = "$(stat -f %z "$dir/$name")" ]; then
     case "$name" in *.json) cmp -s "$src" "$dir/$name" && return ;; *) return ;; esac
   fi
-  if mkdir -p "$dir" && cp -p "$src" "$dir/$name.part" && mv -f "$dir/$name.part" "$dir/$name"; then copied=$((copied + 1))
-  else failed=$((failed + 1)); rm -f "$dir/$name.part"; fi
+  if retry mkdir -p "$dir" && retry cp "$src" "$dir/$name"; then copied=$((copied + 1)); else failed=$((failed + 1)); fi
+}
+# Google Drive for desktop answers "Resource deadlock avoided" while it's still fetching a folder that's only online
+# (an existing month folder, say). Looking at the folder makes it fetch it; then the same step works.
+retry() {
+  local i
+  for i in 1 2 3 4 5 6; do
+    "$@" 2>/dev/null && return 0
+    ls "$DEST" "$DEST"/*/ "$dir" >/dev/null 2>&1
+    sleep $((i * 2))
+  done
+  "$@"
 }
 for f in "$MIRROR"/docs/media/*; do
   [ -f "$f" ] || continue
