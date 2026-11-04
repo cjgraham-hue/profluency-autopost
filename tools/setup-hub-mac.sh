@@ -166,6 +166,12 @@ cd "$HOME" || exit 1
 # ------------------------------------------------------------------------------------------------ 5. timer
 step "5 of 7 · Timer"
 bash <(curl -fsSL "$RAW/tools/setup-mac-timer.sh") </dev/tty | tail -n 4
+# The nightly Google Drive backup of the month's media, once Google Drive for desktop is signed in.
+if ls -d "$HOME"/Library/CloudStorage/GoogleDrive-* >/dev/null 2>&1; then
+  bash <(curl -fsSL "$RAW/tools/setup-drive-backup.sh") </dev/tty | tail -n 3
+else
+  later "Drive backup: install Google Drive for desktop, sign in, then run tools/setup-drive-backup.sh."
+fi
 
 # ------------------------------------------------------------------------------------------------ 6. Chrome and Claude
 step "6 of 7 · Chrome and Claude"
@@ -204,6 +210,8 @@ if [ -n "$RP" ]; then
   case "$gv" in 2.[0-2][0-9].*|1.*|"") no "Runner's git is ${gv:-missing}: run the fix-runner-path command";; *) ok "Runner uses git $gv and $(PATH="$RP" python3 --version 2>&1)";; esac
 fi
 if launchctl print "gui/$(id -u)/uk.co.profluency.post-timer" >/dev/null 2>&1; then ok "Timer is on"; else no "Timer is off: run the setup command again"; fi
+BL=$(tail -n 1 "$HOME/Library/Logs/profluency-drive-backup.log" 2>/dev/null)
+case "$BL" in *✓*) ok "Drive backup: ${BL#* ✓ }, ${BL:0:16}";; "") no "Drive backup isn't set up: run tools/setup-drive-backup.sh";; *) no "Drive backup: ${BL#* ✗ }";; esac
 LOG="$HOME/Library/Logs/profluency-post-timer.log"
 [ -f "$LOG" ] && { echo "  Timer, last lines:"; tail -n 3 "$LOG" | sed 's/^/    /'; }
 if [ -n "$GH" ]; then
