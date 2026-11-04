@@ -57,10 +57,6 @@ if ! xcode-select -p >/dev/null 2>&1; then
   xcode-select --install >/dev/null 2>&1 || true
   exit 1
 fi
-if ! python3 -c 'import sys, zoneinfo; sys.exit(0 if sys.version_info >= (3, 9) else 1)' >/dev/null 2>&1; then
-  echo "Python 3.9 or later isn't ready. Run: xcode-select --install, then run this script again."
-  exit 1
-fi
 find_gh() { GH=$(command -v gh || true); for p in /opt/homebrew/bin/gh /usr/local/bin/gh; do [ -z "$GH" ] && [ -x "$p" ] && GH="$p"; done; }
 find_gh
 if [ -z "$GH" ]; then
@@ -77,6 +73,23 @@ if [ -z "$GH" ]; then
   find_gh
 fi
 [ -n "$GH" ] || { echo "gh didn't install. Install it from https://cli.github.com and run this script again."; exit 1; }
+# Homebrew's folder goes first on the path, so the runner (which keeps the path it's set up with) finds its tools.
+for d in /opt/homebrew/bin /usr/local/bin; do [ -d "$d" ] && case ":$PATH:" in *":$d:"*) ;; *) PATH="$d:$PATH" ;; esac; done
+export PATH
+py_ok() { python3 -c 'import sys, zoneinfo, ssl; sys.exit(0 if sys.version_info >= (3, 9) else 1)' >/dev/null 2>&1; }
+if ! py_ok; then
+  echo "Python 3.9 or later isn't ready (this Mac has: $(python3 --version 2>&1 | head -n 1)). Installing it with Homebrew..."
+  BREW=$(command -v brew || true); for p in /opt/homebrew/bin/brew /usr/local/bin/brew; do [ -z "$BREW" ] && [ -x "$p" ] && BREW="$p"; done
+  if [ -z "$BREW" ] && ask "Python comes from Homebrew, which isn't installed yet. Install Homebrew now (it asks for this Mac's password)?"; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" </dev/tty
+    for p in /opt/homebrew/bin/brew /usr/local/bin/brew; do [ -z "$BREW" ] && [ -x "$p" ] && BREW="$p"; done
+    for d in /opt/homebrew/bin /usr/local/bin; do [ -d "$d" ] && PATH="$d:$PATH"; done; export PATH
+  fi
+  [ -n "$BREW" ] && "$BREW" install python
+  hash -r
+  py_ok || { echo "Python still isn't ready ($(command -v python3 || echo none found)). Send this message to Claude."; exit 1; }
+fi
+echo "Python ready: $(python3 --version 2>&1)."
 if ! python3 -c 'import urllib.request, urllib.error
 try: urllib.request.urlopen("https://graph.instagram.com/", timeout=15)
 except urllib.error.HTTPError: pass' >/dev/null 2>&1; then
