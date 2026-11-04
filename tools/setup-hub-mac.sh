@@ -101,7 +101,8 @@ echo "Signed in to GitHub."
 step "4 of 7 · Posting runner"
 case "$(uname -m)" in arm64) ARCH=arm64 ;; x86_64) ARCH=x64 ;; *) echo "GitHub's runner doesn't support this processor."; exit 1 ;; esac
 mkdir -p "$RUNNER_DIR" && cd "$RUNNER_DIR" || exit 1
-if [ ! -f ./config.sh ]; then
+if [ ! -f ./config.sh ] || ! ls ./externals/node*/bin/node >/dev/null 2>&1; then
+  ./svc.sh stop >/dev/null 2>&1
   VER=$("$GH" api repos/actions/runner/releases/latest --jq '.tag_name' | sed 's/^v//')
   echo "Downloading GitHub's runner $VER..."
   curl -fsSL -o runner.tar.gz "https://github.com/actions/runner/releases/download/v${VER}/actions-runner-osx-${ARCH}-${VER}.tar.gz" \
