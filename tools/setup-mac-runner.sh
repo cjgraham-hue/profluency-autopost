@@ -50,7 +50,8 @@ case "$(uname -m)" in
 esac
 mkdir -p "$DIR"
 cd "$DIR"
-if [ ! -f ./config.sh ]; then
+if [ ! -f ./config.sh ] || ! ls ./externals/node*/bin/node >/dev/null 2>&1; then
+  [ -x ./svc.sh ] && ./svc.sh stop >/dev/null 2>&1
   VER=$(curl -fsSL https://api.github.com/repos/actions/runner/releases/latest \
         | python3 -c 'import json, sys; print(json.load(sys.stdin)["tag_name"].lstrip("v"))')
   say "Downloading the GitHub runner $VER for $ARCH..."
