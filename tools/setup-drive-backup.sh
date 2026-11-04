@@ -154,10 +154,10 @@ launchctl bootstrap "gui/$(id -u)" "$PLIST" 2>/dev/null || launchctl load -w "$P
 # 4. A first run now, the way the timer runs it, so any macOS permission question shows up while you're here.
 say "Running the first backup now. The first one copies everything still in the repository, so it can take a few minutes."
 echo "If macOS asks whether bash may access Google Drive or files on this Mac, choose Allow."
-before=$(wc -l < "$LOG" 2>/dev/null || echo 0)
+touch "$LOG"; before=$(wc -l < "$LOG")
 launchctl kickstart -k "gui/$(id -u)/$LABEL" >/dev/null 2>&1 || bash "$SCRIPT" >> "$LOG" 2>&1
 for _ in $(seq 1 180); do
-  now=$(wc -l < "$LOG" 2>/dev/null || echo 0)
+  now=$(wc -l < "$LOG")
   [ "$now" -gt "$before" ] && tail -n 1 "$LOG" | grep -q -E '✓|✗' && break
   sleep 5
 done
