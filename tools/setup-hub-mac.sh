@@ -150,6 +150,14 @@ if [ ! -f ./.runner ]; then
   unset TOKEN
 fi
 printf '%s' "$HOSTNAME_NOW" > ./.hub-mac
+# The runner keeps its own path. Apple's git goes before /usr/local/bin, where old installers can leave git 2.18,
+# which GitHub no longer talks to; python.org's Python 3.12 goes first when it's there.
+RUNNER_PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/homebrew/bin"
+[ -x /Library/Frameworks/Python.framework/Versions/3.12/bin/python3 ] && RUNNER_PATH="/Library/Frameworks/Python.framework/Versions/3.12/bin:$RUNNER_PATH"
+if [ "$(cat ./.path 2>/dev/null)" != "$RUNNER_PATH" ]; then
+  printf '%s' "$RUNNER_PATH" > ./.path
+  ./svc.sh stop >/dev/null 2>&1
+fi
 ./svc.sh status 2>/dev/null | grep -qi "started" || { ./svc.sh install >/dev/null 2>&1; ./svc.sh start >/dev/null 2>&1; }
 if ./svc.sh status 2>/dev/null | grep -qi "started"; then echo "The runner '$RUNNER_NAME' is running."; else later "Runner: it didn't start. Double-click ProFluency status for details."; fi
 cd "$HOME" || exit 1
@@ -188,6 +196,11 @@ if (cd "$HOME/profluency-runner" 2>/dev/null && ./svc.sh status 2>/dev/null | gr
 if [ -n "$GH" ]; then
   "$GH" api "repos/$REPO/actions/runners" --jq '.runners[] | "\(.name) \(.status)"' 2>/dev/null | while read -r n s; do
     [ "$s" = "online" ] && ok "GitHub sees runner $n online" || no "GitHub sees runner $n $s"; done
+fi
+RP=$(cat "$HOME/profluency-runner/.path" 2>/dev/null)
+if [ -n "$RP" ]; then
+  gv=$(PATH="$RP" git --version 2>/dev/null | awk '{print $3}')
+  case "$gv" in 2.[0-2][0-9].*|1.*|"") no "Runner's git is ${gv:-missing}: run the fix-runner-path command";; *) ok "Runner uses git $gv and $(PATH="$RP" python3 --version 2>&1)";; esac
 fi
 if launchctl print "gui/$(id -u)/uk.co.profluency.post-timer" >/dev/null 2>&1; then ok "Timer is on"; else no "Timer is off: run the setup command again"; fi
 LOG="$HOME/Library/Logs/profluency-post-timer.log"
