@@ -18,6 +18,7 @@ PYDIR="/Library/Frameworks/Python.framework/Versions/3.12/bin"
 printf '%s' "$P" > .path
 ./svc.sh start >/dev/null 2>&1
 echo "The runner now uses: $(PATH="$P" git --version), $(PATH="$P" python3 --version 2>&1), gh at $(PATH="$P" command -v gh || echo 'not found')."
+sleep 4
 if ./svc.sh status 2>/dev/null | grep -qi started; then
   echo "Runner restarted. The next posting run (every 15 minutes) should go green."
 else

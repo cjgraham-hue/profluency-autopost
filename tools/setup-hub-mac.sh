@@ -159,6 +159,7 @@ if [ "$(cat ./.path 2>/dev/null)" != "$RUNNER_PATH" ]; then
   ./svc.sh stop >/dev/null 2>&1
 fi
 ./svc.sh status 2>/dev/null | grep -qi "started" || { ./svc.sh install >/dev/null 2>&1; ./svc.sh start >/dev/null 2>&1; }
+sleep 4
 if ./svc.sh status 2>/dev/null | grep -qi "started"; then echo "The runner '$RUNNER_NAME' is running."; else later "Runner: it didn't start. Double-click ProFluency status for details."; fi
 cd "$HOME" || exit 1
 
