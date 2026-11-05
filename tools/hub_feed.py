@@ -22,7 +22,7 @@ hub's other data), GITHUB_TOKEN and REPO (from the workflow), optional FB_PAGE_I
 GRAPH_VERSION, and HUB_FEED_FULL=1 to read Instagram whatever the time.
 Python 3.9+, standard library only.
 """
-import json, os, random, re, sys, time, urllib.error, urllib.parse, urllib.request, datetime as dt
+import json, os, random, re, socket, ssl, sys, time, urllib.error, urllib.parse, urllib.request, datetime as dt
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VERSION = os.environ.get('GRAPH_VERSION', 'v23.0')
@@ -62,9 +62,22 @@ def request(url, method='GET', params=None, headers=None, body=None, timeout=60)
         data = urllib.parse.urlencode(params).encode()
     req = urllib.request.Request(url, data=data, method=method, headers=headers or {})
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as r:
-            raw = r.read().decode()
-            return json.loads(raw) if raw else {}
+        for attempt in range(3):
+            try:
+                with urllib.request.urlopen(req, timeout=timeout) as r:
+                    raw = r.read().decode()
+                    return json.loads(raw) if raw else {}
+            except urllib.error.HTTPError:
+                raise
+            except urllib.error.URLError as e:
+                # A blip before the request reaches the server (the hub's host now and then fails the secure
+                # handshake, "TLSV1_ALERT_INTERNAL_ERROR"): wait and try again. Nothing was sent, so even a POST is
+                # safe to repeat. Other errors on a POST might have reached the server, so those aren't retried.
+                before_send = isinstance(e.reason, (ssl.SSLError, ConnectionRefusedError, socket.gaierror))
+                if attempt == 2 or not (method == 'GET' or before_send):
+                    raise
+                print(f'Connection problem with {urllib.parse.urlsplit(url).netloc} ({e.reason}); trying again.')
+                time.sleep(10 * (attempt + 1))
     except urllib.error.HTTPError as e:
         raw = e.read().decode(errors='replace')
         try:
