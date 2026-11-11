@@ -70,7 +70,9 @@ REPO="$REPO"
 SITE="cjgraham-hue/profluency"
 GH="$GH"
 stamp() { date '+%Y-%m-%d %H:%M'; }
-busy=\$("\$GH" run list -R "\$REPO" -w autopost.yml -L 5 --json status --jq '[.[] | select(.status != "completed")] | length' 2>&1) \\
+# A run counts as busy only if it was created in the last 30 minutes: GitHub sometimes leaves a run stuck as
+# "queued" for good, and that mustn't stop posting.
+busy=\$("\$GH" run list -R "\$REPO" -w autopost.yml -L 5 --json status,createdAt --jq '[.[] | select(.status != "completed") | select((now - (.createdAt | fromdateiso8601)) < 1800)] | length' 2>&1) \\
   || { echo "\$(stamp) couldn't reach GitHub: \$busy"; exit 0; }
 if [ "\$busy" != "0" ]; then echo "\$(stamp) a posting run is already waiting or running"
 elif out=\$("\$GH" workflow run autopost.yml -R "\$REPO" -f mode=post 2>&1); then
@@ -80,7 +82,7 @@ else
 fi
 hour=\$((10#\$(date +%H))); minute=\$((10#\$(date +%M)))
 if [ \$((hour % 2)) -eq 1 ] && [ "\$minute" -lt 15 ]; then
-  syncing=\$("\$GH" run list -R "\$SITE" -w hub-sync.yml -L 5 --json status --jq '[.[] | select(.status != "completed")] | length' 2>/dev/null || echo 1)
+  syncing=\$("\$GH" run list -R "\$SITE" -w hub-sync.yml -L 5 --json status,createdAt --jq '[.[] | select(.status != "completed") | select((now - (.createdAt | fromdateiso8601)) < 1800)] | length' 2>/dev/null || echo 1)
   if [ "\$syncing" = "0" ] && out=\$("\$GH" workflow run hub-sync.yml -R "\$SITE" 2>&1); then
     echo "\$(stamp) started the hub sync"
   elif [ "\$syncing" != "0" ]; then
