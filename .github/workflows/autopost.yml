@@ -16,7 +16,9 @@ permissions:
   issues: write      # to open an issue (and email you) when something needs doing by hand
 
 concurrency:
-  group: autopost
+  # Renamed from "autopost" on 11 Nov 2026: a run GitHub left half-started (shows as queued, can't be cancelled)
+  # was holding the old group, so every later run waited behind it.
+  group: autopost-posting
   cancel-in-progress: false
 
 jobs:
