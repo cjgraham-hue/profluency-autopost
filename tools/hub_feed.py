@@ -168,6 +168,19 @@ def pr_files(repo, number):
     return names
 
 
+def checks_state(repo, sha):
+    """The checks on a pull request's latest commit (the media check among them): failed, pending or ok."""
+    try:
+        runs = github(f'/repos/{repo}/commits/{sha}/check-runs?per_page=50').get('check_runs') or []
+    except ApiError:
+        return 'ok'
+    if any(r.get('status') == 'completed' and r.get('conclusion') in ('failure', 'timed_out', 'action_required') for r in runs):
+        return 'failed'
+    if any(r.get('status') != 'completed' for r in runs):
+        return 'pending'
+    return 'ok'
+
+
 def apply_decisions(state):
     acks = {}
     repo = setting('REPO')
@@ -198,6 +211,12 @@ def apply_decisions(state):
                     result = {'failed': True, 'result': 'It changes the autopost code or a workflow, so review and merge it on GitHub.'}
                 elif pr.get('draft'):
                     result = {'failed': True, 'result': 'It is still a draft. Mark it ready on GitHub first.'}
+                elif (checks := checks_state(repo, (pr.get('head') or {}).get('sha', ''))) == 'pending':
+                    print(f'hub feed: pull request {number}: waiting for its checks')
+                    continue                     # no answer yet; the next run tries again
+                elif checks == 'failed':
+                    result = {'failed': True, 'result': 'A check failed on it (the media check fails on a Reel or story with a box behind its words). '
+                                                        'Open it on GitHub to see which file.'}
                 else:
                     github(f'/repos/{repo}/pulls/{number}/merge', 'PUT', {'merge_method': 'squash'})
                     result = {'applied': True, 'result': 'Merged. It is in the schedule now.'}
