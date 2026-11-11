@@ -1,0 +1,54 @@
+name: Media check
+
+# Every pull request that adds or changes media is checked for a hard-edged box behind the words
+# (tools/check_media.py): the Reel of 11 Nov 2026 went out with one. The hub feed won't merge a pull request
+# whose check failed. Run it by hand from Actions to check everything still waiting to be posted.
+
+on:
+  pull_request:
+    paths: ['docs/media/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Code only (pull request)
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: tools
+      - name: Everything (by hand)
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Tools
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
+          pip install --quiet numpy pillow
+      - name: Check the pull request's new media
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          dir="$RUNNER_TEMP/media"; mkdir -p "$dir"
+          gh api "repos/$REPO/pulls/$PR/files?per_page=100" --paginate \
+            --jq '.[] | select(.status != "removed") | select(.filename | test("^docs/media/[^/]+\\.(mp4|mov|m4v|jpe?g|png)$"; "i")) | "\(.sha) \(.filename)"' \
+            > "$RUNNER_TEMP/files.txt"
+          if [ ! -s "$RUNNER_TEMP/files.txt" ]; then echo "No videos or pictures in this pull request."; exit 0; fi
+          while read -r sha name; do
+            gh api "repos/$REPO/git/blobs/$sha" -H "Accept: application/vnd.github.raw" > "$dir/$(basename "$name")"
+          done < "$RUNNER_TEMP/files.txt"
+          python3 tools/check_media.py "$dir"/*
+      - name: Check everything still to post
+        if: github.event_name != 'pull_request'
+        run: python3 tools/check_media.py --schedule

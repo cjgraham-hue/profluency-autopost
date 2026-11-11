@@ -18,7 +18,7 @@ permissions:
   contents: write    # to commit the removals
 
 concurrency:
-  group: autopost    # never at the same time as a posting run
+  group: autopost-posting    # never at the same time as a posting run (the group autopost.yml uses since 11 Nov)
   cancel-in-progress: false
 
 jobs:

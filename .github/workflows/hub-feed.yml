@@ -17,6 +17,7 @@ on:
 permissions:
   contents: write        # merging a pull request approved in the hub
   pull-requests: write   # closing one declined in the hub
+  checks: read           # not merging one whose checks failed (tools/check_media.py)
 
 concurrency:
   group: hub-feed
