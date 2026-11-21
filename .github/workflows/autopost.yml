@@ -43,6 +43,18 @@ jobs:
           if [ "$MODE" = "check" ]; then python3 publish.py --check
           elif [ "$MODE" = "dry-run" ]; then python3 publish.py --dry-run
           else python3 publish.py; fi
+      - name: Post the Pinterest pins that are due
+        if: always()
+        env:
+          PINTEREST_TOKEN: ${{ secrets.PINTEREST_TOKEN }}
+          WINDOW_HOURS: '12'
+          REPORT_FILE: report.md
+          MODE: ${{ github.event.inputs.mode }}
+        run: |
+          if [ -z "$PINTEREST_TOKEN" ]; then echo "No PINTEREST_TOKEN secret yet, so no pins are posted."; exit 0; fi
+          if [ "$MODE" = "check" ]; then python3 pins.py --check
+          elif [ "$MODE" = "dry-run" ]; then python3 pins.py --dry-run
+          else python3 pins.py; fi
       - name: Save what was posted
         if: always()
         run: |
